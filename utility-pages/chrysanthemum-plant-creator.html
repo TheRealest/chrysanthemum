@@ -1,0 +1,148 @@
+<html>
+	<head>
+		<title>Chrysanthemum: Plant Creator/Editor</title>
+		<script type='text/javascript' src='http://static.firebase.com/v0/firebase.js'></script>
+		<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
+		<style type="text/css">
+			#rightcolumn {position: fixed; top: 0px; left: 600px;}
+
+			.label {float: left; margin-top: 5px;}
+			.textbox {border: 1px solid; width: 400px; padding: 5px; margin: 3px 120px;}
+			.unedited {font-style: italic; background: #ddd; border: 1px dashed;}
+		</style>
+	</head>
+	<body>
+		<div id='rightcolumn'>
+			<h2>Load existing data:</h2>
+			<select id='load' class='textbox' style='margin: 0px'></select>
+
+			<br /><br />
+			<button id='submit'>Submit completed plant info</button> <span style='font-style: italic; color: #999;'>(Don't forget to edit the <span style='font: 0.9em courier;'>setlist</span>)</span>
+		</div>
+
+		<h2>Reference:</h2>
+		<section class='label'>ref: </section><section id='ref' contenteditable='true' class='textbox unedited'>ref</section>
+		<section class='label'>set: </section><section id='set' contenteditable='true' class='textbox unedited'>set</section>
+
+
+		<h2>DATA:</h2>
+		<section class='label'>commonname: </section><section id='commonname' contenteditable='true' class='textbox unedited'>commonname</section>
+		<section class='label'>scientificname: </section><section id='scientificname' contenteditable='true' class='textbox unedited'>scientificname</section>
+		<section class='label'>picture: </section><section id='picture' contenteditable='true' class='textbox unedited'>images/sets/set/ref/picture.jpg</section>
+		<section class='label'>icon: </section><section id='icon' contenteditable='true' class='textbox unedited'>images/sets/set/ref/icon.png</section>
+		<section class='label'>flavortext: </section><section id='flavortext' contenteditable='true' class='textbox unedited' style='height: 80px;'>flavortext</section>
+		<section class='label'>startinggrowcycle: </section><section id='startinggrowcycle' contenteditable='true' class='textbox unedited'>startinggrowcycle (s)</section>
+		<section class='label'>startingqueuesize: </section><section id='startingqueuesize' contenteditable='true' class='textbox unedited'>startingqueuesize</section>
+
+		<h2>startingcards:</h2>
+		<section class='label'>startingcard1: </section><section id='startingcard1' contenteditable='true' class='textbox unedited'>startingcard1</section>
+		<section class='label'>startingcard2: </section><section id='startingcard2' contenteditable='true' class='textbox unedited'>startingcard2</section>
+		<section class='label'>startingcard3: </section><section id='startingcard3' contenteditable='true' class='textbox unedited'>startingcard3</section>
+
+
+		<script type='text/javascript'>
+
+			// Firebase stuff
+			var rootlink = 'https://gamma.firebase.com/bennlich/';
+			var chrysanthemum = new Firebase(rootlink + 'chrysanthemum');
+			var plantlist = chrysanthemum.child('plantlist');
+			var imagelink = 'images/sets/%set%/%ref%/';
+			$('#load').append('<option value="new">-- NEW --</option>');
+			plantlist.on('child_added', function(snapshot) {
+				var option = '<option value="%plant%">%plantname%</option>'
+				option = option.replace('%plant%',snapshot.name());
+				option = option.replace('%plantname%',snapshot.val().commonname);
+				$('#load').append(option);
+			});
+
+			function submitCard() {
+				var newplant = plantlist.child($('#ref').text());
+
+				newplant.child('commonname').set($('#commonname').text());
+				newplant.child('scientificname').set($('#scientificname').text());
+				newplant.child('picture').set($('#picture').text());
+				newplant.child('icon').set($('#icon').text());
+				newplant.child('startinggrowcycle').set($('#startinggrowcycle').text());
+				newplant.child('startingqueuesize').set($('#startingqueuesize').text());
+				newplant.child('set').set($('#set').text());
+				newplant.child('flavortext').set($('#flavortext').text());
+
+				var startingcards = newplant.child('startingcards');
+				startingcards.set('');
+				startingcards.push({cardtype: $('#startingcard1').text()});
+				startingcards.push({cardtype: $('#startingcard2').text()});
+				startingcards.push({cardtype: $('#startingcard3').text()});
+			}
+			$('section').keypress(function(e) {
+				if (e.keyCode != 9) {
+					$(this).removeClass('unedited');
+				}
+			});
+			$('#ref').keyup(function() {
+				var link = imagelink.replace('%ref%',$('#ref').text());
+				link = link.replace('%set%',$('#set').text());
+				$('#picture').text(link+'picture.jpg');
+				$('#icon').text(link+'icon.png');
+			})
+			$('#set').keyup(function() {
+				var link = imagelink.replace('%ref%',$('#ref').text());
+				link = link.replace('%set%',$('#set').text());
+				$('#picture').text(link+'picture.jpg');
+				$('#icon').text(link+'icon.png');
+			})
+			$('.textbox').focus(function() {
+				if (this.id != 'load') {
+					var range = document.createRange();
+					range.selectNodeContents(this);
+					var sel = window.getSelection();
+					sel.removeAllRanges();
+					sel.addRange(range);
+				}
+			});
+			$('#load').change(function(){
+				var planttype = $('#load option:selected').attr('value');
+				var plant_val;
+				plantlist.child(planttype).once('value',function(snapshot){
+					plant_val = snapshot.val();
+
+					$('#ref').text(snapshot.name());
+					$('#commonname').text(plant_val.commonname);
+					$('#scientificname').text(plant_val.scientificname);
+					$('#picture').text(plant_val.picture);
+					$('#icon').text(plant_val.icon);
+					$('#startinggrowcycle').text(plant_val.startinggrowcycle);
+					$('#startingqueuesize').text(plant_val.startingqueuesize);
+					$('#set').text(plant_val.set);
+					$('#flavortext').text(plant_val.flavortext);
+
+					var i = 1;
+					snapshot.child('startingcards').forEach(function(cardsnapshot) {
+						var cardtype = cardsnapshot.val().cardtype;
+						if (cardtype == '') {cardtype = '&nbsp;';}
+						$('#startingcard' + i).html(cardtype);
+						i++;
+					});
+
+					$('.textbox:gt(0)').addClass('unedited');
+				});
+			});
+
+			$('#submit').click(function(){submitCard();});
+			$('#submitset').click(function(){submitSet()});
+
+			// var roots = chrysanthemum.child('setlist').child('fruit');
+			// roots.setPriority(2);
+			// roots.child('plant1').set('fruit1');
+			// roots.child('plant2').set('fruit2');
+			// roots.child('plant3').set('fruit3');
+			// roots.child('plant4').set('fruit4');
+			// roots.child('displayname').set('Fruit');
+			// chrysanthemum.child('setlist').child('fruit').setPriority(3);
+			// chrysanthemum.child('setlist').child('setting_sun').setPriority(2);
+
+			chrysanthemum.child('timerlist').child('shorten_C').set({animation_type: 'simple', bar_style: 'background: #fcc;', text: 'Shorten'});
+			chrysanthemum.child('actionlist').child('shorten_C').set({action: '', execution: 'delay'});
+
+		</script>
+	</body>
+</html>

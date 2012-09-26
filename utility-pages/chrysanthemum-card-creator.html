@@ -1,0 +1,390 @@
+<html>
+	<head>
+		<title>Chrysanthemum: Card Creator/Editor</title>
+		<script type='text/javascript' src='http://static.firebase.com/v0/firebase.js'></script>
+		<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
+		<style type="text/css">
+			#rightcolumn {position: fixed; top: 0px; left: 600px;}
+			#card-loader {float: left; margin-bottom: 20px}
+			#preview {margin-left: 100px; float: right; margin: 25px 40px 0 0;}
+			#action-editor, #timer-editor {border: 1px solid; width: 600px; padding: 10px; margin: 15px 5px; clear: both;}
+			#submit-action, #submit-timer {margin-top: 10px;}
+			#action-link, #timer-link {color: #444; font-style: italic; cursor: s-resize;}
+			#action-link:hover, #timer-link:hover {text-decoration: underline; color: #000;}
+			#action-link.editor-link-open, #timer-link.editor-link-open {cursor: n-resize;}
+
+			.label {float: left; margin-top: 5px;}
+			.textbox {border: 1px solid; width: 400px; padding: 5px; margin: 3px 140px;}
+			.unedited {font-style: italic; background: #ddd; border: 1px dashed;}
+
+			.card {background: #eee; border: 1px solid #bbb; width: 200px; height: 30px; margin: 5px; padding: 5px; position: relative; -moz-transition: height,min-height 1s; -webkit-transition: height,min-height 1s;}
+			.card:hover {min-height: 82px;}
+			.card .cardname {font: 1.1em optima,serif; float: left; width: 100%; text-align: center;}
+			.card .text {opacity: 0; font: 0.8em sans-serif; position: relative; top: 3px; clear: both; margin-bottom: -10px; -moz-transition: opacity 0.5s ease-in; -webkit-transition: opacity 0.5s ease-in;}
+			.card:hover .text {opacity: 1;}
+			.card .bottom {position: absolute; bottom: 0px; left: -5px; width: 100%; padding-top: 15px;}
+			.card .cost {opacity: 0; position: absolute; left: 10px; bottom: 0px; font: 0.9em sans-serif; -moz-transition: opacity 0.5s; -webkit-transition: opacity 0.5s;}
+			.card .cost:before {content: url(../images/game/cycle-black.png); margin-right: 2px;}
+			.card:hover .cost {opacity: 1}
+			.card .timer {font-size: 0.8em; font-variant: small-caps; -moz-transition: opacity 0.5s; -webkit-transition: opacity 0.5s;}
+			.card:hover .timer {opacity: 0;}
+			.card .duration {position: absolute; right: 0px; bottom: 0px; font: 0.9em sans-serif}
+			.card .duration:before {content: url(../images/game/duration-black.png); margin-right: 3px;}
+			.icon {margin-right: 2px; margin-bottom: -1px;}
+			.timer {font-size: 0.8em; font-variant: small-caps; margin: 7px 15px;}
+		</style>
+	</head>
+	<body>
+		<div id='rightcolumn'>
+			<div id='card-loader'>
+				<h2>Load existing data:</h2>
+				<select id='load' class='textbox' style='margin: 0px; width: 300px;'></select>
+
+				<br /><br />
+				<button id='submit'>Submit completed card info</button>
+			</div>
+			
+			<div id='preview'></div>
+
+			<br /><br />
+			<div id='action-editor'>
+				<span id='action-link'><span id='action-indicator'>&#8594;</span>&nbsp;&nbsp;&nbsp;&nbsp; Action Editor</span>
+				<div id='contents'>
+					<select id='load-actions' class='textbox'></select>
+					<section class='label'>action-ref: </section><section id='action-ref' contenteditable='true' class='textbox unedited'>&nbsp;</section>
+					<section class='label'>execution: </section><section id='execution' contenteditable='true' class='textbox unedited'>&nbsp;</section>
+					<section class='label'>action: </section><section id='action' contenteditable='true' class='textbox unedited' style='height: 60px;'>&nbsp;</section>
+					<button id='submit-action'>Submit completed action info</button>
+				</div>
+			</div>
+
+			<div id='timer-editor'>
+				<span id='timer-link'><span id='timer-indicator'>&#8594;</span>&nbsp;&nbsp;&nbsp;&nbsp; Timer Editor</span>
+				<div id='contents'>
+					<select id='load-timers' class='textbox'></select>
+					<section class='label'>timer-ref: </section><section id='timer-ref' contenteditable='true' class='textbox unedited'>&nbsp;</section>
+					<section class='label'>animation_type: </section><section id='animation_type' contenteditable='true' class='textbox unedited'>&nbsp;</section>
+					<section class='label'>bar_style: </section><section id='bar_style' contenteditable='true' class='textbox unedited'>&nbsp;</section>
+					<section class='label'>timer-text: </section><section id='timer-text' contenteditable='true' class='textbox unedited' style='height: 60px;'>&nbsp;</section>
+					<button id='submit-timer'>Submit completed timer info</button>
+				</div>
+			</div>
+		</div>
+
+		<div id='leftcolumn'>
+		<h2>Reference:</h2>
+		<section class='label'>ref: </section><section id='ref' contenteditable='true' class='textbox unedited'>&nbsp;</section>
+		<section class='label'>notes: </section><section id='notes' contenteditable='true' class='textbox unedited'>&nbsp;</section>
+
+		<h2>displaycontent:</h2>
+		<section class='label'>name: </section><section id='name' contenteditable='true' class='textbox unedited'>&nbsp;</section>
+		<section class='label'>style: </section><section id='style' contenteditable='true' class='textbox unedited' style='height: 80px;'> </section>
+		<section class='label'>cost: </section><section id='cost' contenteditable='true' class='textbox unedited'>&nbsp;</section>
+		<section class='label'>text: </section><section id='text' contenteditable='true' class='textbox unedited' style='height: 80px;'> </section>
+
+		<h2>timer:</h2>
+		<section class='label'>timertype: </section><section id='timertype' contenteditable='true' class='textbox unedited'>&nbsp;</section>
+		<section class='label'>timerarg1 (opt.): </section><section id='timerarg1' contenteditable='true' class='textbox unedited'>&nbsp;</section>
+		<section class='label'>timerarg2 (opt.): </section><section id='timerarg2' contenteditable='true' class='textbox unedited'>&nbsp;</section>
+
+		<h2>action:</h2>
+		<section class='label'>actiontype: </section><section id='actiontype' contenteditable='true' class='textbox unedited'>&nbsp;</section>
+		<section class='label'>actionarg1 (opt.): </section><section id='actionarg1' contenteditable='true' class='textbox unedited'>&nbsp;</section>
+		<section class='label'>actionarg2 (opt.): </section><section id='actionarg2' contenteditable='true' class='textbox unedited'>&nbsp;</section>
+		<section class='label'>interval (opt.): </section><section id='interval' contenteditable='true' class='textbox unedited'>&nbsp;</section>
+
+		<h2>duration:</h2>
+		<section class='label'>duration (s): </section><section id='duration' contenteditable='true' class='textbox unedited'>&nbsp;</section>
+		</div>
+
+
+		<script type='text/javascript'>
+			// Firebase stuff
+			var rootlink = 'https://gamma.firebase.com/bennlich/';
+			var chrysanthemum = new Firebase(rootlink + 'chrysanthemum');
+			var cardlist = chrysanthemum.child('cardlist');
+			$('#load').append('<option value="new">-- NEW --</option>');
+			cardlist.on('child_added', function(snapshot) {
+				var option = '<option value="%card%">%cardname% (%notes%)</option>'
+				option = option.replace('%card%',snapshot.name());
+				option = option.replace('%cardname%',snapshot.val().displaycontent.name);
+				var notes = snapshot.val().notes;
+				if (typeof notes != 'undefined') {
+					option = option.replace('%notes%',snapshot.val().notes);
+				} else {
+					option = option.replace(' (%notes%)','');
+				}
+				$('#load').append(option);
+			});
+
+			var actionlist = chrysanthemum.child('actionlist');
+			$('#load-actions').append('<option value="new">-- NEW --</option>');
+			actionlist.on('child_added', function(snapshot) {
+				var option = '<option value="%action%">%action%</option>'
+				option = option.replace(/%action%/g,snapshot.name());
+				$('#load-actions').append(option);
+			});
+
+			var timerlist = chrysanthemum.child('timerlist');
+			$('#load-timers').append('<option value="new">-- NEW --</option>');
+			timerlist.on('child_added', function(snapshot) {
+				var option = '<option value="%timer%">%timer%</option>'
+				option = option.replace(/%timer%/g,snapshot.name());
+				$('#load-timers').append(option);
+			});
+
+			function submitCard() {
+				var newcard = cardlist.child($('#ref').text());
+				newcard.child('notes').set($('#notes').text());
+				newcard.child('duration').set($('#duration').text());
+
+				var displaycontent = newcard.child('displaycontent');
+				displaycontent.child('name').set($('#name').text());
+				displaycontent.child('style').set($('#style').text());
+				displaycontent.child('cost').set($('#cost').text());
+				displaycontent.child('text').set($('#text').text());
+
+				var timer = newcard.child('timer');
+				timer.child('timertype').set($('#timertype').text());
+				if (!$('#timerarg1').hasClass('unedited')) {
+					timer.child('timerarg1').set($('#timerarg1').text());
+				}
+				if (!$('#timerarg2').hasClass('unedited')) {
+					timer.child('timerarg2').set($('#timerarg2').text());
+				}
+
+				var action = newcard.child('action');
+				action.child('actiontype').set($('#actiontype').text());
+				if (!$('#actionarg1').hasClass('unedited')) {
+					action.child('actionarg1').set($('#actionarg1').text());
+				}
+				if (!$('#actionarg2').hasClass('unedited')) {
+					action.child('actionarg2').set($('#actionarg2').text());
+				}
+				if (!$('#interval').hasClass('unedited')) {
+					action.child('interval').set($('#interval').text());
+				}
+			}
+
+			function submitAction() {
+				var newaction = actionlist.child($('#action-ref').text());
+				console.log($('#action-ref').text());
+				newaction.child('action').set($('#action').text());
+				newaction.child('execution').set($('#execution').text());
+			}
+
+			function submitTimer() {
+				var newtimer = timerlist.child($('#timer-ref').text());
+				newtimer.child('animation_type').set($('#animation_type').text());
+				newtimer.child('bar_style').set($('#bar_style').text());
+				newtimer.child('text').set($('#timer-text').text());
+			}
+
+			$('section').keypress(function(e) {
+				if (e.keyCode != 9) {
+					$(this).removeClass('unedited');
+				}
+			});
+			$('.textbox').focus(function() {
+				if (this.id != 'load') {
+					var range = document.createRange();
+					range.selectNodeContents(this);
+					var sel = window.getSelection();
+					sel.removeAllRanges();
+					sel.addRange(range);
+				}
+			});
+
+			function erase_card() {
+				$('#ref').html('');
+					$('#notes').html('');
+					$('#duration').html('');
+					$('#name').html('');
+					$('#style').html('');
+					$('#cost').html('');
+					$('#text').html('');
+					$('#actiontype').html('');
+					$('#actionarg1').html('');
+					$('#actionarg2').html('');
+					$('#interval').html('');
+					$('#timertype').html('');
+					$('#timerarg1').html('');
+					$('#timerarg2').html('');
+
+					$('#leftcolumn .textbox:not(select)').addClass('unedited');
+			}
+			$('#load').change(function(){
+				var choice = $('#load option:selected').attr('value');
+				if (choice == 'new') {
+					erase_card();
+				} else {
+					var cardtype = choice;
+					var card_val;
+					cardlist.child(cardtype).once('value',function(snapshot){
+						card_val = snapshot.val();
+
+						erase_card();
+						$('#ref').text(snapshot.name());
+						$('#notes').text(card_val.notes);
+						$('#duration').text(card_val.duration);
+
+						var displaycontent = card_val.displaycontent;
+						$('#name').text(displaycontent.name);
+						$('#style').text(displaycontent.style);
+						$('#cost').text(displaycontent.cost);
+						$('#text').text(displaycontent.text);
+
+						var action = card_val.action;
+						$('#actiontype').text(action.actiontype);
+						$('#actionarg1').text(action.actionarg1);
+						$('#actionarg2').text(action.actionarg2);
+						$('#interval').text(action.interval);
+
+						var timer = card_val.timer;
+						$('#timertype').text(timer.timertype);
+						$('#timerarg1').text(timer.timerarg1);
+						$('#timerarg2').text(timer.timerarg2);
+
+						$('#leftcolumn .textbox:not(select)').addClass('unedited');
+					});
+				}
+			});
+
+			$('#load-actions').change(function(){
+				var choice = $('#load-actions option:selected').attr('value');
+				if (choice == 'new') {
+					$('#action-ref').html('&nbsp;');
+					$('#action').html('&nbsp;');
+					$('#execution').html('&nbsp;');
+
+					$('#action-editor .textbox:not(select)').addClass('unedited');
+				} else {
+					var actiontype = choice;
+					var action_val;
+					actionlist.child(actiontype).once('value',function(snapshot){
+						action_val = snapshot.val();
+
+						$('#action-ref').text(snapshot.name());
+						$('#action').text(action_val.action);
+						$('#execution').text(action_val.execution);
+
+						$('#action-editor .textbox:not(select)').addClass('unedited');
+					});
+				}
+			});
+
+			$('#load-timers').change(function(){
+				var choice = $('#load-timers option:selected').attr('value');
+				if (choice == 'new') {
+					$('#timer-ref').html('&nbsp;');
+					$('#animation_type').html('&nbsp;');
+					$('#bar_style').html('&nbsp;');
+					$('#timer-text').html('&nbsp;');
+
+					$('#timer-editor .textbox:not(select)').addClass('unedited');
+				} else {
+					var timertype = choice;
+					var timer_val;
+					timerlist.child(timertype).once('value',function(snapshot){
+						timer_val = snapshot.val();
+
+						$('#timer-ref').text(snapshot.name());
+						$('#animation_type').text(timer_val.animation_type);
+						$('#bar_style').text(timer_val.bar_style);
+						$('#timer-text').text(timer_val.text);
+
+
+						$('#timer-editor .textbox:not(select)').addClass('unedited');
+					});
+				}
+			});
+
+			$('#submit').click(function(){submitCard();});
+			$('#submit-action').click(function(){submitAction();});
+			$('#submit-timer').click(function(){submitTimer();});
+
+			$('#action-editor #contents').hide();
+			var action_editor_shown = false;
+			$('#action-link').click(function() {
+				if (action_editor_shown) {
+					$('#action-editor #contents').hide();
+					action_editor_shown = false;
+					$('#action-indicator').html('&#8594;');
+					$('#action-link').removeClass('editor-link-open');
+				} else {
+					$('#action-editor #contents').show();
+					action_editor_shown = true;
+					$('#action-indicator').html('&#8627;');
+					$('#action-link').addClass('editor-link-open');
+				}
+			});
+
+			$('#timer-editor #contents').hide();
+			var timer_editor_shown = false;
+			$('#timer-link').click(function() {
+				if (timer_editor_shown) {
+					$('#timer-editor #contents').hide();
+					timer_editor_shown = false;
+					$('#timer-indicator').html('&#8594;');
+					$('#timer-link').removeClass('editor-link-open');
+				} else {
+					$('#timer-editor #contents').show();
+					timer_editor_shown = true;
+					$('#timer-indicator').html('&#8627;');
+					$('#timer-link').addClass('editor-link-open');
+				}
+			});
+
+
+
+			function format_seconds(seconds) {
+				var secondsrem = seconds % 60;
+				var minutes = 0;
+				while (seconds != secondsrem) {
+					seconds -= 60;
+					minutes++;
+				}
+				if (seconds < 10) {seconds = '0' + seconds;}
+				return minutes + ':' + seconds;
+			}
+			function generate_timer_text(timertype) {
+				if (timertype != '') {
+					var text;
+					timerlist.once('value', function(snapshot) {
+						var timer_ex = snapshot.val()[timertype];
+						console.log(snapshot.val()[timertype]);
+						if ($('#timerarg1').text() != '') {
+							if ($('#timerarg2').text() != '') {
+								text = timer_ex.text +' ('+$('#timerarg1').text()+')'+' ('+$('#timerarg2').text()+')';
+							} else {
+								text = timer_ex.text +' ('+$('#timerarg1').text()+')';
+							}
+						} else {
+							text = timer_ex.text;
+						}
+					});
+					return text;
+				}
+			}
+			$('.textbox').live('change keyup', function() {
+				var display = '<div class="card" style="%style%"><span class="cardname">%name%</span><br /><span class="text">%text%</span><br /> <br /><span class="bottom"><span class="timer">%timer%</span> <span class="cost">%cost%</span> <span class="duration">%duration%</span></span></div>';
+				display = display.replace('%style%',$('#style').text());
+				display = display.replace('%name%',$('#name').text());
+				display = display.replace('%text%',$('#text').text());
+				display = display.replace('%timer%',generate_timer_text($('#timertype').text()));
+				display = display.replace('%cost%',format_seconds($('#cost').text()));
+				display = display.replace('%duration%',$('#duration').text());
+				display = display.replace(/images/g,'../images');
+				$('#preview').html(display);
+			});
+
+			// chrysanthemum.child('actionlist').child('expand_Q').set({action: 'currentuser.child("queue_size").transaction(function(currentsize){return currentsize + (%arg1%);});', execution: 'delay'});
+			// chrysanthemum.child('timerlist').child('expand_Q').set({animation_type: 'flashing', bar_style: 'background: #696;', text: 'Expand'});
+
+			// chrysanthemum.child('timerlist').child('draw_n_grow_P').set({animation_type: 'simple', bar_style: 'background: #4ca;', text: 'Draw/Grow'});
+			// chrysanthemum.child('actionlist').child('draw_n_grow_P').set({action: 'draw_n_cards(%arg1%); adjust_points(%arg2%);', execution: 'delay'});
+
+
+		</script>
+	</body>
+</html>
