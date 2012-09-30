@@ -2,8 +2,9 @@
 	<head>
 		<title>Chrysanthemum</title>
 		<script type='text/javascript' src='http://static.firebase.com/v0/firebase.js'></script>
-		<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
+		<script type='text/javascript' src='lib/jquery-1.8.2.min.js'></script>
 		<link rel='stylesheet' href='css/style.css'>
+		<link rel='stylesheet' href='css/animation.css'>
 	</head>
 	<body>
 		
@@ -73,7 +74,7 @@
 			/////////////////////////////////////////////////
 
 			// Reference info
-			var rootlink = 'https://gamma.firebase.com/bennlich/';
+			var rootlink = 'https://gamma.firebase.com/therealest/';
 			var chrysanthemum = new Firebase(rootlink + 'chrysanthemum');
 			var users = chrysanthemum.child('users');
 			var cardlist, actionlist, timerlist, plantlistsnapshot, plantlist, setlist;

@@ -1,0 +1,35 @@
+@-moz-keyframes simple {
+	0% {width: 0%;}
+	100% {width: 100%;}
+}
+@-moz-keyframes flashing {
+	0% {width: 0%; opacity: 1;}
+	10% {width: 10%; opacity: 0.3;}
+	20% {width: 20%; opacity: 1;}
+	30% {width: 30%; opacity: 0.3;}
+	40% {width: 40%; opacity: 1;}
+	50% {width: 50%; opacity: 0.3;}
+	60% {width: 60%; opacity: 1;}
+	70% {width: 70%; opacity: 0.3;}
+	80% {width: 80%; opacity: 1;}
+	90% {width: 90%; opacity: 0.3;}
+	100% {width: 100%;}
+}
+
+@-webkit-keyframes simple {
+	0% {width: 0%;}
+	100% {width: 100%;}
+}
+@-webkit-keyframes flashing {
+	0% {width: 0%; opacity: 1;}
+	10% {width: 10%; opacity: 0.3;}
+	20% {width: 20%; opacity: 1;}
+	30% {width: 30%; opacity: 0.3;}
+	40% {width: 40%; opacity: 1;}
+	50% {width: 50%; opacity: 0.3;}
+	60% {width: 60%; opacity: 1;}
+	70% {width: 70%; opacity: 0.3;}
+	80% {width: 80%; opacity: 1;}
+	90% {width: 90%; opacity: 0.3;}
+	100% {width: 100%;}
+}

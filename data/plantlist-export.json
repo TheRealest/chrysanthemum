@@ -1,0 +1,86 @@
+{
+  "peyote":{
+    "startingqueuesize":"2",
+    "startinggrowcycle":"270",
+    "startingcards":{
+      "-IbekewBcIXk_hNXvnLf":{
+        "cardtype":"blossom"
+      },
+      "-Ibekew9YXNgdE9YgfHa":{
+        "cardtype":"blossom"
+      },
+      "-Ibekew61DkipBugguhF":{
+        "cardtype":"blossom"
+      }
+    },
+    "set":"roots",
+    "scientificname":"Lophophora williamsii",
+    "picture":"images/sets/roots/peyote/picture.jpg",
+    "icon":"images/sets/roots/peyote/icon.png",
+    "flavortext":"This cactus produced the psychoactive compound mescaline. Native Americans have used peyote for spiritual purposes for over 5000 years.",
+    "commonname":"Peyote"
+  },
+  "houndstongue":{
+    "startingqueuesize":"2",
+    "startinggrowcycle":"150",
+    "startingcards":{
+      "-Ibekg0_iVYQIivl-cw-":{
+        "cardtype":"blossom"
+      },
+      "-Ibekg0YUxf-Gc2O4dvj":{
+        "cardtype":"blossom"
+      },
+      "-Ibekg0WflLV-BtSgGyB":{
+        "cardtype":"blossom"
+      }
+    },
+    "set":"roots",
+    "scientificname":"Cynoglossum officinale",
+    "picture":"images/sets/roots/houndstongue/picture.jpg",
+    "icon":"images/sets/roots/houndstongue/icon.png",
+    "flavortext":"Houndstongue is an invasive species and a danger to livestock; cattle that eat too much suffer liver damage.",
+    "commonname":"Houndstongue"
+  },
+  "garland_chrysanthemum":{
+    "startingqueuesize":"1",
+    "startinggrowcycle":"300",
+    "startingcards":{
+      "-IbekcyQbY6bw6XD9Xup":{
+        "cardtype":"careful_study"
+      },
+      "-IbekcyLYaGV3_ly_X21":{
+        "cardtype":"spring_showers"
+      },
+      "-IbekcyIyYDTztyaO29X":{
+        "cardtype":"blossom"
+      }
+    },
+    "set":"roots",
+    "scientificname":"Chrysanthemum coronarium",
+    "picture":"images/sets/roots/garland_chrysanthemum/picture.jpg",
+    "icon":"images/sets/roots/garland_chrysanthemum/icon.png",
+    "flavortext":"The leaves of this beautiful flower are common in Asian cuisine, including Taiwanese, Korean, and Cantonese dishes.",
+    "commonname":"Garland Chrysanthemum"
+  },
+  "century_plant":{
+    "startingqueuesize":"1",
+    "startinggrowcycle":"540",
+    "startingcards":{
+      "-IbekZELSg0KafZ-vjaB":{
+        "cardtype":"blossom"
+      },
+      "-IbekZEH_lqSqUwfwBp2":{
+        "cardtype":"blossom"
+      },
+      "-IbekZEFK1HqkSmP-xMc":{
+        "cardtype":"blossom"
+      }
+    },
+    "set":"roots",
+    "scientificname":"Agave americana",
+    "picture":"images/sets/roots/century_plant/picture.jpg",
+    "icon":"images/sets/roots/century_plant/icon.png",
+    "flavortext":"The sweet liquid inside this plant, which blooms only once in its century-long life, can be fermented into a drink called pulque.",
+    "commonname":"Century Plant"
+  }
+}

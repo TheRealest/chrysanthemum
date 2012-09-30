@@ -1,0 +1,38 @@
+{
+  "shorten_C":{
+    "execution":"delay",
+    "action":""
+  },
+  "nothing":{
+    "execution":"delay",
+    "action":""
+  },
+  "increase_clock":{
+    "execution":"delay",
+    "action":"adjust_grow_cycle(%arg1%)"
+  },
+  "grow_P":{
+    "execution":"delay",
+    "action":"adjust_points(%arg1%)"
+  },
+  "grow_C_P":{
+    "execution":"delay",
+    "action":"adjust_grow_cycle(-%arg1%); adjust_points(%arg2%);"
+  },
+  "extend_C":{
+    "execution":"delay",
+    "action":"adjust_grow_cycle(%arg1%)"
+  },
+  "expand_Q":{
+    "execution":"delay",
+    "action":"currentuser.child(\"queue_size\").transaction(function(currentsize){return currentsize + (%arg1%);});"
+  },
+  "draw_n_grow_P":{
+    "execution":"delay",
+    "action":"draw_n_cards(%arg1%); adjust_points(%arg2%);"
+  },
+  "draw_n":{
+    "execution":"delay",
+    "action":"draw_n_cards(%arg1%)"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "shorten_C":{
+    "text":"Shorten",
+    "bar_style":"background: #fcc;",
+    "animation_type":"simple"
+  },
+  "nothing":{
+    "text":"Nothing",
+    "bar_style":"background: #ccc;",
+    "animation_type":"simple"
+  },
+  "grow_P":{
+    "text":"Grow",
+    "bar_style":"background: #fd1;",
+    "animation_type":"simple"
+  },
+  "grow_C_P":{
+    "text":"Grow",
+    "bar_style":"background: #fd1;",
+    "animation_type":"simple"
+  },
+  "extend_C":{
+    "text":"Extend <img src='images/game/cycle-black.png' class='icon'>",
+    "bar_style":"background: #3c3;",
+    "animation_type":"simple"
+  },
+  "expand_Q":{
+    "text":"Expand",
+    "bar_style":"background: #696;",
+    "animation_type":"flashing"
+  },
+  "draw_n_grow_P":{
+    "text":"Draw/Grow",
+    "bar_style":"background: #4ca;",
+    "animation_type":"simple"
+  },
+  "draw_n":{
+    "text":"Draw",
+    "bar_style":"background: #66f;",
+    "animation_type":"simple"
+  }
+}

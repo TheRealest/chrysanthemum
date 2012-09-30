@@ -1,0 +1,186 @@
+{
+  "spring_showers":{
+    "timer":{
+      "timertype":"extend_C",
+      "timerarg1":"10"
+    },
+    "notes":"extend 10",
+    "duration":"3",
+    "displaycontent":{
+      "text":"Extend <img src='images/game/cycle-black.png' class='icon'>0:10.",
+      "style":"background: #cfc; border: 1px solid #3c3;",
+      "name":"Spring Showers",
+      "cost":"10"
+    },
+    "action":{
+      "actiontype":"extend_C",
+      "actionarg1":"10"
+    }
+  },
+  "research":{
+    "timer":{
+      "timertype":"draw_n",
+      "timerarg1":"2"
+    },
+    "notes":"draw 2",
+    "duration":"12",
+    "displaycontent":{
+      "text":"Draw two cards.",
+      "style":"background: #ccf; border: 1px solid #66f;",
+      "name":"Research",
+      "cost":"15"
+    },
+    "action":{
+      "actiontype":"draw_n",
+      "actionarg1":"2"
+    }
+  },
+  "pesticide":{
+    "timer":{
+      "timertype":"shorten_C",
+      "timerarg1":"10"
+    },
+    "notes":"attack 10",
+    "duration":"3",
+    "displaycontent":{
+      "text":"Your opponent shortens <img src='images/game/cycle-black.png' class='icon'>0:10.",
+      "style":"background: #fcc; border: 1px dashed #f66;",
+      "name":"Pesticide",
+      "cost":"15"
+    },
+    "action":{
+      "actiontype":"shorten_C",
+      "actionarg1":"10"
+    }
+  },
+  "growth":{
+    "timer":{
+      "timertype":"grow_C_P",
+      "timerarg2":"5",
+      "timerarg1":"5"
+    },
+    "notes":"grow 5/5",
+    "duration":"3",
+    "displaycontent":{
+      "text":"Shorten <img src='images/game/cycle-black.png' class='icon'>0:05 and grow <img src='images/game/point-black.png' class='icon'>5.",
+      "style":"background: #ffb; border: 1px solid #fd1;",
+      "name":"Growth",
+      "cost":"5"
+    },
+    "action":{
+      "actiontype":"grow_C_P",
+      "actionarg2":"5",
+      "actionarg1":"5"
+    }
+  },
+  "garden_plot":{
+    "timer":{
+      "timertype":"expand_Q",
+      "timerarg1":"1"
+    },
+    "notes":"expand",
+    "duration":"30",
+    "displaycontent":{
+      "text":"Expand your queue by 1.",
+      "style":"background: #a75; border: 1px solid #474;",
+      "name":"Garden Plot",
+      "cost":"30"
+    },
+    "action":{
+      "actiontype":"expand_Q",
+      "actionarg1":"1"
+    }
+  },
+  "cloudy_skies":{
+    "timer":{
+      "timertype":"grow_P",
+      "timerarg1":"1"
+    },
+    "notes":"starting card",
+    "duration":"2",
+    "displaycontent":{
+      "text":"Grow <img src='images/game/point-black.png' class='icon'>1.",
+      "style":"",
+      "name":"Cloudy Skies",
+      "cost":"0"
+    },
+    "action":{
+      "actiontype":"grow_P",
+      "actionarg1":"1"
+    }
+  },
+  "clear_skies":{
+    "timer":{
+      "timertype":"grow_P",
+      "timerarg1":"2"
+    },
+    "notes":"starting card",
+    "duration":"2",
+    "displaycontent":{
+      "text":"Grow <img src='images/game/point-black.png' class='icon'>2.",
+      "style":"",
+      "name":"Clear Skies",
+      "cost":"0"
+    },
+    "action":{
+      "actiontype":"grow_P",
+      "actionarg1":"2"
+    }
+  },
+  "careful_study":{
+    "timer":{
+      "timertype":"draw_n_grow_P",
+      "timerarg2":"3",
+      "timerarg1":"1"
+    },
+    "notes":"draw 1, grow 3",
+    "duration":"5",
+    "displaycontent":{
+      "text":"Draw a card and grow <img src='images/game/point-black.png' class='icon'>3.",
+      "style":"background: #6fc; border: 1px solid #296;",
+      "name":"Careful Study",
+      "cost":"12"
+    },
+    "action":{
+      "actiontype":"draw_n_grow_P",
+      "actionarg2":"3",
+      "actionarg1":"1"
+    }
+  },
+  "blossom":{
+    "timer":{
+      "timertype":"grow_C_P",
+      "timerarg2":"20",
+      "timerarg1":"15"
+    },
+    "notes":"grow 15/20",
+    "duration":"10",
+    "displaycontent":{
+      "text":"Shorten <img src='images/game/cycle-black.png' class='icon'>0:15 and grow <img src='images/game/point-black.png' class='icon'>20.",
+      "style":"background: #ffb; border: 1px solid #fd1;",
+      "name":"Blossom",
+      "cost":"20"
+    },
+    "action":{
+      "actiontype":"grow_C_P",
+      "actionarg2":"20",
+      "actionarg1":"15"
+    }
+  },
+  "bad_weather":{
+    "timer":{
+      "timertype":"nothing"
+    },
+    "notes":"starting card",
+    "duration":"2",
+    "displaycontent":{
+      "text":"",
+      "style":"",
+      "name":"Bad Weather",
+      "cost":"0"
+    },
+    "action":{
+      "actiontype":"nothing"
+    }
+  }
+}
