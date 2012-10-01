@@ -8,7 +8,7 @@ function Wildfire($http,$q) {
 
 	var fbRoot = new Firebase('http://gamma.firebase.com/therealest');
 
-
+	
 
 	// Firebase conversion helper functions
 	function fbFROMrl(rl) {
