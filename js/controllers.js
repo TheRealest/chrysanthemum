@@ -1,5 +1,6 @@
 function WelcomeCtrl($scope,wildfire) {
-	wildfire.withScope($scope).setVar('test').from.rl('room').report();
+	wildfire.fuse().withScope($scope).rl('test').mod('test').install();
+
 }
 
 function MatchMakerCtrl($scope) {
