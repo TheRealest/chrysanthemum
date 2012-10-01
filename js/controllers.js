@@ -1,5 +1,5 @@
 function WelcomeCtrl($scope,wildfire) {
-	wildfire.fuse().withScope($scope).rl('test').mod('test').install();
+	wildfire.fuse().withScope($scope).rl('test').md('test').install();
 
 }
 

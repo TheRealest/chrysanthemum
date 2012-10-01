@@ -1,7 +1,7 @@
 function Wildfire($http,$q) {
 	// Firebase variable prefix convention:
 	// ------------------------------------
-	// * `mod`: Angular model variable
+	// * `md`: Angular model variable
 	// * `rl`: relative link
 	// * `fb`: Firebase object
 	// * `ss`: Firebase snapshot
@@ -11,42 +11,42 @@ function Wildfire($http,$q) {
 	var fbRoot = new Firebase(rootlink);
 
 	// Initiators of Angular/Firebase connections
-	function updateAngular(scope,modTarget,fbSource) {
-		return new AngFromFire(scope,modTarget,fbSource);
+	function updateAngular(scope,mdTarget,fbSource) {
+		return new AngFromFire(scope,mdTarget,fbSource);
 	}
 
-	function updateFirebase(scope,fbTarget,modSource) {
-		return new FireFromAng(scope,fbTarget,modSource);
+	function updateFirebase(scope,fbTarget,mdSource) {
+		return new FireFromAng(scope,fbTarget,mdSource);
 	}
 
-	function fuse(scope,fb,mod) {
-		return new FireAngFuse(scope,fb,mod);
+	function fuse(scope,fb,md) {
+		return new FireAngFuse(scope,fb,md);
 	}
 
 	// General object for connecting the Angular model to a Firebase asynchronous call
-	function AngFromFire(scope,modTarget,fbSource) {
+	function AngFromFire(scope,mdTarget,fbSource) {
 		function withScope($scope) {
-			return new AngFromFire($scope,modTarget,fbSource);
+			return new AngFromFire($scope,mdTarget,fbSource);
 		}
 
-		function setMod(model) {
-			return new AngFromFire(scope,model,fbSource);
+		function setMd(md) {
+			return new AngFromFire(scope,md,fbSource);
 		}
 
 		var from = {
 			fb : function(fbNewSource) {
-				return new AngFromFire(scope,modTarget,fbNewSource);
+				return new AngFromFire(scope,mdTarget,fbNewSource);
 			},
 			rl : function(rlNewSource) {
 				var fbNewSource = fbFROMrl(rlNewSource);
-				return new AngFromFire(scope,modTarget,fbNewSource);
+				return new AngFromFire(scope,mdTarget,fbNewSource);
 			}
 		}
 
 		function once() {
 			fbSource.once('value',function(ss) {
 				scope.$apply(function() {
-					scope[modTarget] = obFROMss(ss);
+					scope[mdTarget] = obFROMss(ss);
 				});
 			});
 		}
@@ -54,13 +54,13 @@ function Wildfire($http,$q) {
 		function always() {
 			fbSource.on('value',function(ss) {
 				scope.$apply(function() {
-					scope[modTarget] = obFROMss(ss);
+					scope[mdTarget] = obFROMss(ss);
 				});
 			});
 		}
 
 		function report() {
-			var modTargetReport = 'modTarget: ' + modTarget;
+			var mdTargetReport = 'mdTarget: ' + mdTarget;
 			var fbSourceReport = 'rlSource: ' + rlFROMfb(fbSource);
 			var scopeReport;
 			if (scope == undefined) {
@@ -68,13 +68,13 @@ function Wildfire($http,$q) {
 			} else {
 				scopeReport = 'scope: set';
 			}
-			var report = scopeReport + '; ' + modTargetReport + '; ' + fbSourceReport;
+			var report = scopeReport + '; ' + mdTargetReport + '; ' + fbSourceReport;
 			console.log(report);
 		}
 		
 		return {
 			withScope:withScope,
-			setMod:setMod,
+			setMd:setMd,
 			from:from,
 			once:once,
 			always:always,
@@ -83,31 +83,31 @@ function Wildfire($http,$q) {
 	}
 
 	// General object for pushing Angular view->model changes to a Firebase location
-	function FireFromAng(scope,fbTarget,modSource) {
+	function FireFromAng(scope,fbTarget,mdSource) {
 		function withScope($scope) {
-			return new FireFromAng($scope,fbTarget,modSource);
+			return new FireFromAng($scope,fbTarget,mdSource);
 		}
 
 		function setRl(rl) {
-			return new FireFromAng(scope,fbFROMrl(rl),modSource);
+			return new FireFromAng(scope,fbFROMrl(rl),mdSource);
 		}
 
 		function setFirebase(fb) {
-			return new FireFromAng(scope,fb,modSource);
+			return new FireFromAng(scope,fb,mdSource);
 		}
 
 		var from = {
-			mod : function(modNewSource) {
-				return new FireFromAng(scope,fbTarget,modNewSource);
+			md : function(mdNewSource) {
+				return new FireFromAng(scope,fbTarget,mdNewSource);
 			}
 		}
 
 		function once() {
-			fbTarget.set(scope[modSource]);
+			fbTarget.set(scope[mdSource]);
 		}
 
 		function always() {
-			scope.$watch(modSource,function(update,old) {
+			scope.$watch(mdSource,function(update,old) {
 				if (update !== undefined) {
 					fbTarget.set(update);
 				}
@@ -116,14 +116,14 @@ function Wildfire($http,$q) {
 
 		function report() {
 			var fbTargetReport = 'rlTarget: ' + rlFROMfb(fbTarget);
-			var modSourceReport = 'modSource: ' + modSource;
+			var mdSourceReport = 'mdSource: ' + mdSource;
 			var scopeReport;
 			if (scope == undefined) {
 				scopeReport = 'scope: undefined';
 			} else {
 				scopeReport = 'scope: set';
 			}
-			var report = scopeReport + '; ' + fbTargetReport + '; ' + modSourceReport;
+			var report = scopeReport + '; ' + fbTargetReport + '; ' + mdSourceReport;
 			console.log(report);
 		}
 		
@@ -138,39 +138,39 @@ function Wildfire($http,$q) {
 		}
 	}
 
-	// Object for doing both AngFromFire and FireFromAng on the same fb/mod pair
-	function FireAngFuse(scope,fbRef,modRef) {
+	// Object for doing both AngFromFire and FireFromAng on the same fb/md pair
+	function FireAngFuse(scope,fbRef,mdRef) {
 		function withScope($scope) {
-			return new FireAngFuse($scope,fbRef,modRef);
+			return new FireAngFuse($scope,fbRef,mdRef);
 		}
 
 		function fb(fbRefNew) {
-			return new FireAngFuse(scope,fbRefNew,modRef);
+			return new FireAngFuse(scope,fbRefNew,mdRef);
 		}
 
 		function rl(rlRefNew) {
-			return new FireAngFuse(scope,fbFROMrl(rlRefNew),modRef);
+			return new FireAngFuse(scope,fbFROMrl(rlRefNew),mdRef);
 		}
 
-		function mod(modRefNew) {
-			return new FireAngFuse(scope,fbRef,modRefNew);
+		function md(mdRefNew) {
+			return new FireAngFuse(scope,fbRef,mdRefNew);
 		}
 
 		function install() {
-			updateAngular(scope,modRef,fbRef).always();
-			updateFirebase(scope,fbRef,modRef).always();
+			updateAngular(scope,mdRef,fbRef).always();
+			updateFirebase(scope,fbRef,mdRef).always();
 		}
 
 		function report() {
 			var fbRefReport = 'rl: ' + rlFROMfb(fbRef);
-			var modRefReport = 'modRef: ' + modRef;
+			var mdRefReport = 'mdRef: ' + mdRef;
 			var scopeReport;
 			if (scope == undefined) {
 				scopeReport = 'scope: undefined';
 			} else {
 				scopeReport = 'scope: set';
 			}
-			var report = scopeReport + '; ' + fbRefReport + '; ' + modRefReport;
+			var report = scopeReport + '; ' + fbRefReport + '; ' + mdRefReport;
 			console.log(report);
 		}
 
@@ -178,7 +178,7 @@ function Wildfire($http,$q) {
 			withScope:withScope,
 			fb:fb,
 			rl:rl,
-			mod:mod,
+			md:md,
 			install:install,
 			report:report
 		}
