@@ -11,31 +11,40 @@ function Wildfire($http,$q) {
 	var fbRoot = new Firebase(rootlink);
 	var scope;
 
-	// Must be called first to provide the scope for model manipulation
-	function setScope($scope) {
-		scope = $scope;
-	}
-
 	// First function called when setting an ng-model variable from Firebase
-	function setVar(variable) {
-		return new AngFromFire(variable);
+	function withScope($scope) {
+		return new AngFromFire($scope);
 	}
 
 	// General object for connecting the Angular model to a Firebase asynchronous call
-	function AngFromFire(varTarget,fbSource) {
+	function AngFromFire(scope,varTarget,fbSource) {
+		function setVar(variable) {
+			return new AngFromFire(scope,variable);
+		}
+
 		var from = {
 			fb : function(fbNewSource) {
-				return new AngFromFire(varTarget,fbNewSource);
+				return new AngFromFire(scope,varTarget,fbNewSource);
 			},
 			rl : function(rlNewSource) {
 				var fbNewSource = fbFROMrl(rlNewSource);
-				return new AngFromFire(varTarget,fbNewSource);
+				return new AngFromFire(scope,varTarget,fbNewSource);
 			}
 		}
 
 		function once() {
 			fbSource.once('value',function(ss) {
-				scope[varTarget] = obFROMss(ss);
+				scope.$apply(function() {
+					scope[varTarget] = obFROMss(ss);
+				});
+			});
+		}
+
+		function always() {
+			fbSource.on('value',function(ss) {
+				scope.$apply(function() {
+					scope[varTarget] = obFROMss(ss);
+				});
 			});
 		}
 
@@ -43,12 +52,15 @@ function Wildfire($http,$q) {
 			var varTargetReport = 'varTarget: ' + varTarget;
 			var fbSourceReport = 'rlSource: ' + rlFROMfb(fbSource);
 			var report = varTargetReport + '; ' + fbSourceReport;
+			console.log(scope);
 			console.log(report);
 		}
 		
 		return {
+			setVar:setVar,
 			from:from,
 			once:once,
+			always:always,
 
 			varTarget:varTarget,
 			fbSource:fbSource,
@@ -71,7 +83,6 @@ function Wildfire($http,$q) {
 
 	// Declaring public methods (Revealing Module Pattern)
 	return {
-		setScope:setScope,
-		setVar:setVar
+		withScope:withScope
 	}
 }

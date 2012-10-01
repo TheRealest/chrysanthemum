@@ -1,6 +1,5 @@
 function WelcomeCtrl($scope,wildfire) {
-	wildfire.setScope($scope);
-	wildfire.setVar('test').from.rl('room').once();
+	wildfire.withScope($scope).setVar('test').from.rl('room').report();
 }
 
 function MatchMakerCtrl($scope) {
