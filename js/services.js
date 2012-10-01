@@ -5,53 +5,42 @@ function Wildfire($http,$q) {
 	// ss: snapshot
 	// ob: Javascript object literal
 
-	// Conversion examples:
-	// fb* = fbFROMrl(rl*);
-	// fb* = ss*.ref();
-	// rl* = fb*.toString();
-	// ss* = fb*.once('value',function(ss*){ return ss*});
-	// ob* = ss*.val();
-	// ob* = fb*.once('value',function(ss*){ return ss*.val()});
-	// ob* = fbFROMrl(rl*).once('value',function(ss*){ return ss*.val()});
-
-	// Maybe create some helper functions like ssFROMfb?
-
-	// var foo;
 	var fbRoot = new Firebase('http://gamma.firebase.com/therealest');
 
 	function getValue(scope,rl) {
+		// Create a deferref object with $q
 		var deferred = $q.defer();
 		var ob;
 
+		// Turn the relative link passed to the function into a Firebase object
 		var fb = fbFROMrl(rl);
-		fb.once('value', function(snapshot) {
-			ob = snapshot.val();
-			console.log(ob);
+		fb.once('value', function(ss) {
+			// Get the data stored at this Firebase location
+			ob = obFROMss(ss);
 
+			// We need to wrap the deferred resolution in an $apply call so that the view properly updates when the asynchronous call is completed
+			// We pass the scope of the controller to the Wildfire function so that the controller can remain ignorant to promises, deferreds, and $q
 			scope.$apply(function() {
+				// This tells deferred to set its promise equal to ob when the asynchronous call for ob is completed
 				deferred.resolve(ob);
 			});
 		});
 
+		// Finally we return a promise so that the controller which called this function knows to expect the result when the asynchronous call is complete
+		// In the mean time the view will simply be empty
 		return deferred.promise;
 	}
-
-
-
-	// $http.get('data/cardlist-export.json').success(function(data) {
-	// 	foo = data.spring_showers.displaycontent.name;
-	// 	console.log(foo);
-	// });
-	// console.log(foo);
-
 
 	// Firebase conversion helper functions
 	function fbFROMrl(rl) {
 		return fbRoot.child(rl);
 	}
+	function obFROMss(ss) {
+		return ss.val();
+	}
 
+	// Declaring public methods (Revealing Module Pattern)
 	return {
-		// foo:foo
 		getValue:getValue
 	}
 }
