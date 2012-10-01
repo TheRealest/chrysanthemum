@@ -1,11 +1,9 @@
-function WelcomeCtrl($scope,$http) {
-	$scope.foo = 'Hello';
+function WelcomeCtrl($scope,wildfire) {
+	// $scope.foo = wildfire.foo;
+	// console.log(wildfire.foo);
 
-	$http.get('data/cardlist-export.json').success(function(data) {
-		$scope.cardlist = data;
-	});
+	$scope.test = wildfire.getValue($scope,'test');
 
-	
 }
 
 function MatchMakerCtrl($scope) {
