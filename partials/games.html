@@ -1,14 +1,14 @@
+
+
 <div class='row'>
 	<div class='four columns'>
-		<form name='newGameForm'>
+		<form name='newGameForm' ng-hide='newGameSubmitted'>
 			<fieldset>
 				<legend>Create New Game</legend>
-				<input type='text' name='name' placeholder='Name (letters/numbers only)' ng-model='newGame.name' ng-pattern='alphanumRegexp' ng-class='{shadowedInput: true, shadowedInputError: !newGameForm.name.$valid}' required>
-				<select ng-model='newGame.privacy' class='shadowedInput'>
-					<option value='public'>Public</option>
-					<option value='private'>Private</option>
-				</select>
-				<button name='submit' ng-click='if(newGameForm.$valid) {submitNewGame()}' ng-class='{shadowedInput: true, shadowedInputError: !newGameForm.$valid}'>Submit</button>
+				<input type='text' name='name' placeholder='Name (alphanumeric only)' ng-model='newGame.name' ng-pattern='alphanumRegexp' ng-class='{shadowedInput: true, shadowedInputError: !newGameForm.name.$valid}' required>
+				<select ng-model='newGame.privacy' ng-options='option as info.label for (option,info) in privacyOptions' required></select>
+				<br /><br />
+				<button name='submit' ng-click='submitNewGame(newGameForm.$valid)' ng-class='{small: true, success: newGameForm.$valid, alert: !newGameForm.$valid, button: true}'>Create Game</button>
 
 				<br /><br />
 				Valid: {{newGameForm.$valid}}

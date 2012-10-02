@@ -209,6 +209,7 @@ function Wildfire($http,$q) {
 function MatchMaker(wildfire) {
 	var games = wildfire.fbFROMrl('games');
 	function newGame(info) {
+		console.log(info);
 		games.push(info);
 	}
 

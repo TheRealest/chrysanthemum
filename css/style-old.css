@@ -399,32 +399,3 @@
 #draw_timer .outer-bar {
 	width: 140px;
 }
-
-/*.shadowedInput {
-	width: 200px;
-	padding: 2px;
-	margin: 5px;
-	outline: none;
-	border-radius: 8px 0 / 4px 0;
-	border: 1px solid #444;
-	-webkit-transition: border 0.3s, box-shadow 0.3s, background 0.3s;
-	-moz-transition: border 0.3s, box-shadow 0.3s, background 0.3s;
-}
-.shadowedInput:focus {
-	border: 1px solid #2d2;
-	box-shadow: 0 0 5px #2a2;
-}
-.shadowedInputError:focus {
-	border: 1px solid #d22;
-	box-shadow: 0 0 5px #a22;
-}
-select.shadowedInput {
-	width: 205px;
-}
-button.shadowedInput:focus {
-	background: #2c2;
-	border: 1px solid #000;
-}
-button.shadowedInputError:focus {
-	background: #c22;
-}*/

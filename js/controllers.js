@@ -5,6 +5,16 @@ function LoginCtrl($scope,wildfire) {
 
 function GamesCtrl($scope,matchMaker) {
 	$scope.alphanumRegexp = /^[A-z0-9 ]*$/;
+	$scope.privacyOptions = {
+		public : {
+			label : 'Public'
+		},
+		private : {
+			label : 'Private'
+		}
+	};
+
+
 	
 	$scope.resetNewGame = function() {
 		$scope.newGame = {
@@ -13,10 +23,12 @@ function GamesCtrl($scope,matchMaker) {
 		}
 	}
 
-	$scope.submitNewGame = function() {
-		console.log($scope.newGame);
-		matchMaker.newGame($scope.newGame);
-		$scope.resetNewGame();
+	$scope.submitNewGame = function(valid) {
+		if (valid) {
+			matchMaker.newGame($scope.newGame);
+			$scope.newGameSubmitted = true;
+		}
+		
 	}
 
 	$scope.resetNewGame();
