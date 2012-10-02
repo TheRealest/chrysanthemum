@@ -10,27 +10,30 @@
    Shared Styles
 ----------------------------------------- */
 
-.animateHide {
+.animate-hide {
 	opacity: 1;
 	-webkit-transition: opacity 0.5s;
 }
 .hide {
 	opacity: 0;
+	display: block;
+}
+.display-none {
 	display: none;
 }
 
-.animateShrink {
+.animate-shrink {
 	max-height: 400px;
 	opacity: 1;
 	overflow: hidden;
 	-webkit-transition: max-height 2s ease-out, opacity 2s;
 }
-.animateShrink.shrink {
+.shrink {
 	max-height: 0;
 	opacity: 0;
 }
 
-.animateColor {
+.animate-color {
 	-webkit-transition: color 0.3s;
 }
 .red {
@@ -40,23 +43,51 @@
 	color: #2c2;
 }
 
+fieldset {
+	border-radius: 10px 0 / 8px 0;
+	border-width: 3px 1px 2px;
+	border-style: double solid solid;
+	padding-bottom: 10px;
+}
+fieldset legend {
+	font-size: 1.4em;
+	color: #444;
+	padding-left: 8px;
+	padding-right: 10px;
+}
+
 
 /* -----------------------------------------
    games
 ----------------------------------------- */
 
-#gamelist #scrollarea {
-	max-height: 300px;
-	overflow: auto;
-	margin-bottom: 15px;
+#target-buttons {
+	padding-top: 10px;
 }
-#gamelist .odd {
+#target-buttons fieldset {
+	font-size: 2em;
+	width: 65px;
+	height: 65px;
+	padding-top: 12px;
+	color: #444;
+	text-align: center;
+}
+#target-buttons fieldset:hover {
+	border-color: #999;
+	color: #4d4;
+}
+
+#gamelistView #scrollarea {
+	max-height: 312px;
+	overflow: auto;
+}
+#gamelistView .odd {
 	background: #e0f5e0;
 }
-#gamelist .even {
+#gamelistView .even {
 
 }
-#gamelist .lineitem {
+#gamelistView .lineitem {
 	padding: 4px;
 }
 .foundicon-unlock.privacyicon {
@@ -64,8 +95,4 @@
 }
 .foundicon-lock.privacyicon {
 	color: #888;
-}
-
-fieldset {
-	border-radius: 8px 0 / 6px 0;
 }

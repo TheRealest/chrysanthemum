@@ -1,10 +1,11 @@
 <div class='row'>
-	<div class='four columns'>
+	<!-- <div class='four columns'>
 		<fieldset>
-			<legend><i class='foundicon-website animateColor' ng-class='{red: !newGameForm.$valid, green: newGameForm.$valid}'></i> {{gamePanelLegend()}}</legend>
-			<div class='animateShrink' ng-class='{shrink: newGameSubmitted}'>
+			<legend><i class='foundicon-website animate-color' ng-class='{red: !newGameForm.$valid, green: newGameForm.$valid}'></i> {{gamePanelLegend()}}</legend>
+			<div><!-- class='animate-shrink' ng-class='{shrink: newGameSubmitted}' 
 				<form name='newGameForm' ng-submit='submitNewGame(newGameForm.$valid)'>
-					<input type='text' name='name' placeholder='Name (alphanumeric only)' ng-model='newGame.name' ng-pattern='alphanumRegexp' required>
+					<input type='text' name='name' placeholder='Name (alphanumeric only)' ng-model='newGame.name' ng-pattern='alphanumRegexp' ng-class='{error: newGameForm.name.$error.pattern}' required>
+					<small class='error' ng-show='newGameForm.name.$error.pattern'>Letters and numbers only</small>
 
 					<select ng-model='newGame.privacy' ng-options='option as info.label for (option,info) in privacyOptions' required></select><br /><br />
 
@@ -12,23 +13,27 @@
 				</form>
 			</div>
 		</fieldset>
-		<fieldset ng-class='{animateHide: true, hide: !newGameSubmitted}'>
+		<fieldset ng-class='{animate-hide: true, hide: !newGameSubmitted}'>
 			<legend>Current Game</legend>
 
 		</fieldset>
+		<fieldset>stuff</fieldset>
 		
-	</div>
-	<div class='eight columns'>
-		<div id='gamelist'>
-			<fieldset>
-				<legend><i class='foundicon-flag'></i> Game List</legend>
-
-				<div id='scrollarea'>
-					<div ng-repeat='(id,data) in gamelist' class='lineitem' ng-class-odd="'odd'" ng-class-even="'even'">
-						<i class='ng-class: iconClass(data.privacy)'></i> <span id='id'>{{id}}</span>, <span id='name'>{{data.name}}</span>
-					</div>
-				</div>
+	</div> -->
+	<div id='target-buttons' class='one columns offset-by-one'>
+			<fieldset id='gamelist'>
+				<i class='foundicon-flag' style='font-size: 1.4em;'></i>
 			</fieldset>
-		</div>
+	</div>
+	<div class='ten columns'>
+		<fieldset id='gamelistView'>
+			<legend><i class='foundicon-flag'></i> Game List</legend>
+
+			<div id='scrollarea'>
+				<div ng-repeat='(id,data) in gamelist' class='lineitem' ng-class-odd="'odd'" ng-class-even="'even'">
+					<i class='ng-class: iconClass(data.privacy)'></i> <span id='id'>{{id}}</span>, <span id='name'>{{data.name}}</span>
+				</div>
+			</div>
+		</fieldset>
 	</div>
 </div>

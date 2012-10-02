@@ -13,10 +13,11 @@
   width: auto;
   height: auto;
   line-height: inherit;
-  vertical-align: baseline;
+  vertical-align: text-bottom;
   background-image: none;
   background-position: 0 0;
   background-repeat: repeat;
+  margin: 2px;
 }
 
 [class*="foundicon-"]:before {
