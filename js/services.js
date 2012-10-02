@@ -45,7 +45,7 @@ function Wildfire($http,$q) {
 
 		function once() {
 			fbSource.once('value',function(ss) {
-				scope.$apply(function() {
+				scope.safeApply(function() {
 					scope[mdTarget] = obFROMss(ss);
 				});
 			});
@@ -53,7 +53,7 @@ function Wildfire($http,$q) {
 
 		function always() {
 			fbSource.on('value',function(ss) {
-				scope.$apply(function() {
+				scope.safeApply(function() {
 					scope[mdTarget] = obFROMss(ss);
 				});
 			});
@@ -111,7 +111,7 @@ function Wildfire($http,$q) {
 				if (update !== undefined) {
 					fbTarget.set(update);
 				}
-			});
+			},true);
 		}
 
 		function report() {
