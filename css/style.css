@@ -2,8 +2,7 @@
    Table of Contents
 -----------------------------------------------------
 :: Shared Styles
-:: Page Name 1
-:: Page Name 2
+:: games
 */
 
 
@@ -11,17 +10,62 @@
    Shared Styles
 ----------------------------------------- */
 
+.animateHide {
+	opacity: 1;
+	-webkit-transition: opacity 0.5s;
+}
+.hide {
+	opacity: 0;
+	display: none;
+}
+
+.animateShrink {
+	max-height: 400px;
+	opacity: 1;
+	overflow: hidden;
+	-webkit-transition: max-height 2s ease-out, opacity 2s;
+}
+.animateShrink.shrink {
+	max-height: 0;
+	opacity: 0;
+}
+
+.animateColor {
+	-webkit-transition: color 0.3s;
+}
+.red {
+	color: #c22;
+}
+.green {
+	color: #2c2;
+}
 
 
 /* -----------------------------------------
-   Page Name 1
+   games
 ----------------------------------------- */
 
+#gamelist #scrollarea {
+	max-height: 300px;
+	overflow: auto;
+	margin-bottom: 15px;
+}
+#gamelist .odd {
+	background: #e0f5e0;
+}
+#gamelist .even {
 
+}
+#gamelist .lineitem {
+	padding: 4px;
+}
+.foundicon-unlock.privacyicon {
+	color: #bbb;
+}
+.foundicon-lock.privacyicon {
+	color: #888;
+}
 
-
-/* -----------------------------------------
-   Page Name 2
------------------------------------------ */
-
-
+fieldset {
+	border-radius: 8px 0 / 6px 0;
+}

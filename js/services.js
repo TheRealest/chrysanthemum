@@ -202,18 +202,32 @@ function Wildfire($http,$q) {
 		updateAngular:updateAngular,
 		updateFirebase:updateFirebase,
 		fuse:fuse,
-		fbFROMrl:fbFROMrl
+		fbFROMrl:fbFROMrl,
+		obFROMss:obFROMss
 	}
 }
 
 function MatchMaker(wildfire) {
 	var games = wildfire.fbFROMrl('games');
+	var game = {};
+	var currentgame;
+
 	function newGame(info) {
-		console.log(info);
-		games.push(info);
+		currentgame = games.push(info).name();
 	}
 
+	function fuseGameList(scope) {
+		wildfire.fuse().withScope(scope).rl('games').md('gamelist').install();
+	}
+
+	// games.on('value', function(ss) {
+	// 	game.list = wildfire.obFROMss(ss);
+	// 	console.log(game.list);
+	// });
+
 	return {
-		newGame:newGame
+		newGame:newGame,
+		fuseGameList:fuseGameList,
+		game:game
 	}
 }

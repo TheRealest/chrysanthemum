@@ -1,21 +1,34 @@
-
-
 <div class='row'>
 	<div class='four columns'>
-		<form name='newGameForm' ng-hide='newGameSubmitted'>
-			<fieldset>
-				<legend>Create New Game</legend>
-				<input type='text' name='name' placeholder='Name (alphanumeric only)' ng-model='newGame.name' ng-pattern='alphanumRegexp' ng-class='{shadowedInput: true, shadowedInputError: !newGameForm.name.$valid}' required>
-				<select ng-model='newGame.privacy' ng-options='option as info.label for (option,info) in privacyOptions' required></select>
-				<br /><br />
-				<button name='submit' ng-click='submitNewGame(newGameForm.$valid)' ng-class='{small: true, success: newGameForm.$valid, alert: !newGameForm.$valid, button: true}'>Create Game</button>
+		<fieldset>
+			<legend><i class='foundicon-website animateColor' ng-class='{red: !newGameForm.$valid, green: newGameForm.$valid}'></i> {{gamePanelLegend()}}</legend>
+			<div class='animateShrink' ng-class='{shrink: newGameSubmitted}'>
+				<form name='newGameForm' ng-submit='submitNewGame(newGameForm.$valid)'>
+					<input type='text' name='name' placeholder='Name (alphanumeric only)' ng-model='newGame.name' ng-pattern='alphanumRegexp' required>
 
-				<br /><br />
-				Valid: {{newGameForm.$valid}}
-			</fieldset>
-		</form>
+					<select ng-model='newGame.privacy' ng-options='option as info.label for (option,info) in privacyOptions' required></select><br /><br />
+
+					<button name='submit' type='submit' class = 'small button' ng-class='{success: newGameForm.$valid, alert: !newGameForm.$valid}'>Create Game</button>
+				</form>
+			</div>
+		</fieldset>
+		<fieldset ng-class='{animateHide: true, hide: !newGameSubmitted}'>
+			<legend>Current Game</legend>
+
+		</fieldset>
+		
 	</div>
-	<!-- <div class='eight columns'>
-		stuff
-	</div> -->
+	<div class='eight columns'>
+		<div id='gamelist'>
+			<fieldset>
+				<legend><i class='foundicon-flag'></i> Game List</legend>
+
+				<div id='scrollarea'>
+					<div ng-repeat='(id,data) in gamelist' class='lineitem' ng-class-odd="'odd'" ng-class-even="'even'">
+						<i class='ng-class: iconClass(data.privacy)'></i> <span id='id'>{{id}}</span>, <span id='name'>{{data.name}}</span>
+					</div>
+				</div>
+			</fieldset>
+		</div>
+	</div>
 </div>

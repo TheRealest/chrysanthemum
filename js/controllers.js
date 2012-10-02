@@ -14,21 +14,33 @@ function GamesCtrl($scope,matchMaker) {
 		}
 	};
 
-
+	matchMaker.fuseGameList($scope);
 	
 	$scope.resetNewGame = function() {
-		$scope.newGame = {
-			// name : 'name',
-			// privacy : 'public'
-		}
+		$scope.newGame = {};
 	}
 
 	$scope.submitNewGame = function(valid) {
 		if (valid) {
 			matchMaker.newGame($scope.newGame);
 			$scope.newGameSubmitted = true;
+		}	
+	}
+
+	$scope.iconClass = function(privacy) {
+		if (privacy == 'public') {
+			return 'foundicon-unlock privacyicon';
+		} else if (privacy == 'private') {
+			return 'foundicon-lock privacyicon';
 		}
-		
+	}
+
+	$scope.gamePanelLegend = function() {
+		if ($scope.newGameSubmitted) {
+			return 'Current Game';
+		} else {
+			return 'Create New Game';
+		}
 	}
 
 	$scope.resetNewGame();
