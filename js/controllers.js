@@ -3,6 +3,6 @@ function WelcomeCtrl($scope,wildfire) {
 	wildfire.fuse().withScope($scope).rl('apartment').md('apartment').install();
 }
 
-function MatchMakerCtrl($scope) {
+function GamesCtrl($scope) {
 	
 }

@@ -6,7 +6,7 @@ var sys = require('sys'),
     url = require('url'),
     events = require('events');
 
-var DEFAULT_PORT = 8000;
+var DEFAULT_PORT = 1337;
 
 function main(argv) {
   new HttpServer({
@@ -92,6 +92,8 @@ StaticServlet.prototype.handleRequest = function(req, res) {
   var parts = path.split('/');
   if (parts[parts.length-1].charAt(0) === '.')
     return self.sendForbidden_(req, res, path);
+  if (parts[parts.length-1] === '')
+    return self.sendFile_(req,res,'index.html');
   fs.stat(path, function(err, stat) {
     if (err)
       return self.sendMissing_(req, res, path);

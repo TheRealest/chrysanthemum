@@ -204,3 +204,7 @@ function Wildfire($http,$q) {
 		fuse:fuse
 	}
 }
+
+function MatchMaker(wildfire) {
+
+}
