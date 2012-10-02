@@ -9,10 +9,10 @@ angular.module('chrysanthemum.filter', []);
 angular.module('chrysanthemum', ['chrysanthemum.service','chrysanthemum.directive','chrysanthemum.filter']).
 	config(['$routeProvider', function($routeProvider) {
 		$routeProvider.
-			when('/welcome', {templateUrl: 'partials/welcome.html',	 controller: WelcomeCtrl}).
+			when('/login', {templateUrl: 'partials/login.html',	 controller: LoginCtrl}).
 			when('/games', {templateUrl: 'partials/games.html',	 controller: GamesCtrl}).
 			// when('/plants/:setSlug', {templateUrl: '../partials/plant_sheets.html', controller: PlantSheetsCtrl}).
-			otherwise({redirectTo: '/welcome'});
+			otherwise({redirectTo: '/login'});
 	}]).
 	run(function($rootScope) {
 		$rootScope.safeApply = function(fn) {

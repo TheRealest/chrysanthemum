@@ -1,1 +1,21 @@
-games page
+<div class='row'>
+	<div class='four columns'>
+		<form name='newGameForm'>
+			<fieldset>
+				<legend>Create New Game</legend>
+				<input type='text' name='name' placeholder='Name (letters/numbers only)' ng-model='newGame.name' ng-pattern='alphanumRegexp' ng-class='{shadowedInput: true, shadowedInputError: !newGameForm.name.$valid}' required>
+				<select ng-model='newGame.privacy' class='shadowedInput'>
+					<option value='public'>Public</option>
+					<option value='private'>Private</option>
+				</select>
+				<button name='submit' ng-click='if(newGameForm.$valid) {submitNewGame()}' ng-class='{shadowedInput: true, shadowedInputError: !newGameForm.$valid}'>Submit</button>
+
+				<br /><br />
+				Valid: {{newGameForm.$valid}}
+			</fieldset>
+		</form>
+	</div>
+	<!-- <div class='eight columns'>
+		stuff
+	</div> -->
+</div>

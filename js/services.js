@@ -7,7 +7,7 @@ function Wildfire($http,$q) {
 	// * `ss`: Firebase snapshot
 	// * `ob`: Javascript object literal
 
-	var rootlink = 'http://gamma.firebase.com/therealest/';
+	var rootlink = 'http://gamma.firebase.com/therealest/chrysanthemum';
 	var fbRoot = new Firebase(rootlink);
 
 	// Initiators of Angular/Firebase connections
@@ -201,10 +201,18 @@ function Wildfire($http,$q) {
 	return {
 		updateAngular:updateAngular,
 		updateFirebase:updateFirebase,
-		fuse:fuse
+		fuse:fuse,
+		fbFROMrl:fbFROMrl
 	}
 }
 
 function MatchMaker(wildfire) {
+	var games = wildfire.fbFROMrl('games');
+	function newGame(info) {
+		games.push(info);
+	}
 
+	return {
+		newGame:newGame
+	}
 }
