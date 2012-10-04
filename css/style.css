@@ -61,38 +61,47 @@ fieldset legend {
    games
 ----------------------------------------- */
 
-#target-buttons {
-	padding-top: 10px;
+#view-buttons {
+	padding-top: 25px;
 }
-#target-buttons fieldset {
+#view-buttons .view-button {
 	font-size: 2em;
 	width: 65px;
 	height: 65px;
 	padding-top: 12px;
+	margin: 5px;
 	color: #444;
 	text-align: center;
 }
-#target-buttons fieldset:hover {
-	border-color: #999;
-	color: #4d4;
+#view-buttons .view-button:hover {
+	border-color: #aaa;
+	color: #2a2;
+}
+#view-buttons .view-button.current-view {
+	background: #2a2;
+	color: #fff;
+	border-color: #666;
+}
+.no-touch #view-buttons .view-button.current-view:hover {
+	color: #444;
 }
 
-#gamelistView #scrollarea {
-	max-height: 312px;
+#scrollarea {
+	max-height: 210px;
 	overflow: auto;
 }
-#gamelistView .odd {
+#gamelist .odd {
 	background: #e0f5e0;
 }
-#gamelistView .even {
+#gamelist .even {
 
 }
-#gamelistView .lineitem {
+#gamelist .lineitem {
 	padding: 4px;
 }
-.foundicon-unlock.privacyicon {
-	color: #bbb;
+.icon-unlock.privacyicon {
+	color: #ccc;
 }
-.foundicon-lock.privacyicon {
+.icon-lock.privacyicon {
 	color: #888;
 }

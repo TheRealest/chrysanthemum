@@ -1,8 +1,9 @@
 <div class='row'>
-	<!-- <div class='four columns'>
+	<!-- CREATE GAME PANEL -->
+ 	<!-- <div class='four columns'>
 		<fieldset>
 			<legend><i class='foundicon-website animate-color' ng-class='{red: !newGameForm.$valid, green: newGameForm.$valid}'></i> {{gamePanelLegend()}}</legend>
-			<div><!-- class='animate-shrink' ng-class='{shrink: newGameSubmitted}' 
+			<div>
 				<form name='newGameForm' ng-submit='submitNewGame(newGameForm.$valid)'>
 					<input type='text' name='name' placeholder='Name (alphanumeric only)' ng-model='newGame.name' ng-pattern='alphanumRegexp' ng-class='{error: newGameForm.name.$error.pattern}' required>
 					<small class='error' ng-show='newGameForm.name.$error.pattern'>Letters and numbers only</small>
@@ -12,27 +13,32 @@
 					<button name='submit' type='submit' class = 'small button' ng-class='{success: newGameForm.$valid, alert: !newGameForm.$valid}'>Create Game</button>
 				</form>
 			</div>
-		</fieldset>
-		<fieldset ng-class='{animate-hide: true, hide: !newGameSubmitted}'>
-			<legend>Current Game</legend>
-
-		</fieldset>
-		<fieldset>stuff</fieldset>
-		
+		</fieldset>		
 	</div> -->
-	<div id='target-buttons' class='one columns offset-by-one'>
-			<fieldset id='gamelist'>
-				<i class='foundicon-flag' style='font-size: 1.4em;'></i>
-			</fieldset>
+	<div id='view-buttons' class='one columns'>
+		<fieldset ng-repeat='button in buttons' class='view-button' ng-class='{"current-view" : isCurrentView(button[0])}' ng-click='setCurrentView(button[0])'>
+			<i ng-class='button[1].icon' style='font-size: 1.4em;'></i>
+		</fieldset>
 	</div>
-	<div class='ten columns'>
-		<fieldset id='gamelistView'>
-			<legend><i class='foundicon-flag'></i> Game List</legend>
+	<script type='text/javascript'>
+		if (navigator.userAgent.match(/iPhone|iPod|iPad/i)) { $(".view-button").click(function() {}); }
+	</script>
+	<div class='eleven columns'>
+
+		<fieldset id='gamelist' class='view' ng-hide='!isCurrentView("gamelist")'>
+			<legend><i ng-class='views.gamelist.icon'></i> {{views.gamelist.title}}</legend>
 
 			<div id='scrollarea'>
 				<div ng-repeat='(id,data) in gamelist' class='lineitem' ng-class-odd="'odd'" ng-class-even="'even'">
 					<i class='ng-class: iconClass(data.privacy)'></i> <span id='id'>{{id}}</span>, <span id='name'>{{data.name}}</span>
 				</div>
+			</div>
+		</fieldset>
+		<fieldset id='leaderboard' class='view' ng-hide='!isCurrentView("leaderboard")'>
+			<legend><i ng-class='views.leaderboard.icon'></i> {{views.leaderboard.title}}</legend>
+
+			<div id='scrollarea'>
+				
 			</div>
 		</fieldset>
 	</div>

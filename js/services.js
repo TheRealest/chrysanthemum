@@ -207,7 +207,7 @@ function Wildfire($http,$q) {
 	}
 }
 
-function MatchMaker(wildfire) {
+function Autumn(wildfire) {
 	var games = wildfire.fbFROMrl('games');
 	var game = {};
 	var currentgame;
