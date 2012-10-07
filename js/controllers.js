@@ -17,29 +17,11 @@ function LoginCtrl($scope,wildfire) {
 	$scope.usernameRegexp = /^\w+$/;
 	$scope.keywords = ['mind','strategy','deck','garden','harmony','roots','plant'];
 
-	$(document).tooltips();
-
-	$scope.blinkIcon = function() {
-		var icon = $('#login-title .icon');
-		icon.delay(2500).animate({color: '#543'},500).delay(100).animate({color: '#2a2'},500).delay(1400);
-		icon.queue(function(next) {$scope.blinkIcon(); next();});
-	}
-
-	$scope.changeKeyword = function(i) {
-		var subtitle = $('#login-title .subtitle');
-		var keywordWrapper = $('#login-title .subtitle-rotator');
-		var keyword = $('#login-title .subtitle-rotator span');
-		keyword.animate({color: '#eee'},500);
-		keyword.queue(function(next) {keyword.text($scope.keywords[i]); subtitle.fadeToggle(0).fadeToggle(0); next();});
-		keyword.animate({color: '#2a2'},500).delay(4000);
-		var nextIndex = Math.floor(Math.random()*$scope.keywords.length);
-		if (nextIndex == i) nextIndex = Math.floor(Math.random()*$scope.keywords.length);
-		keyword.queue(function(next) {$scope.changeKeyword(nextIndex); next();});
-	}
+	// $(document).tooltips();
 
 	// $scope.blinkIcon = function() {
 	// 	var icon = $('#login-title .icon');
-	// 	icon.delay(2500).animate({color: '#3ea'},500).delay(100).animate({color: '#dda'},500).delay(1400);
+	// 	icon.delay(2500).animate({color: '#543'},500).delay(100).animate({color: '#2a2'},500).delay(1400);
 	// 	icon.queue(function(next) {$scope.blinkIcon(); next();});
 	// }
 
@@ -47,13 +29,31 @@ function LoginCtrl($scope,wildfire) {
 	// 	var subtitle = $('#login-title .subtitle');
 	// 	var keywordWrapper = $('#login-title .subtitle-rotator');
 	// 	var keyword = $('#login-title .subtitle-rotator span');
-	// 	keyword.animate({color: '#124'},500);
+	// 	keyword.animate({color: '#eee'},500);
 	// 	keyword.queue(function(next) {keyword.text($scope.keywords[i]); subtitle.fadeToggle(0).fadeToggle(0); next();});
-	// 	keyword.animate({color: '#dda'},500).delay(4000);
+	// 	keyword.animate({color: '#2a2'},500).delay(4000);
 	// 	var nextIndex = Math.floor(Math.random()*$scope.keywords.length);
 	// 	if (nextIndex == i) nextIndex = Math.floor(Math.random()*$scope.keywords.length);
 	// 	keyword.queue(function(next) {$scope.changeKeyword(nextIndex); next();});
 	// }
+
+	$scope.blinkIcon = function() {
+		var icon = $('#login-title .icon');
+		icon.delay(2500).animate({color: '#dda'},500).delay(100).animate({color: '#3ea'},500).delay(1400);
+		icon.queue(function(next) {$scope.blinkIcon(); next();});
+	}
+
+	$scope.changeKeyword = function(i) {
+		var subtitle = $('#login-title .subtitle');
+		var keywordWrapper = $('#login-title .subtitle-rotator');
+		var keyword = $('#login-title .subtitle-rotator span');
+		keyword.animate({color: '#124'},500);
+		keyword.queue(function(next) {keyword.text($scope.keywords[i]); subtitle.fadeToggle(0).fadeToggle(0); next();});
+		keyword.animate({color: '#3ea'},500).delay(4000);
+		var nextIndex = Math.floor(Math.random()*$scope.keywords.length);
+		if (nextIndex == i) nextIndex = Math.floor(Math.random()*$scope.keywords.length);
+		keyword.queue(function(next) {$scope.changeKeyword(nextIndex); next();});
+	}
 
 	$scope.activateLogin = function() {
 		var icon = $('#login-title .icon');

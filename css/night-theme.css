@@ -59,12 +59,13 @@ fieldset {
 	border-radius: 10px 0 / 8px 0;
 	border-width: 3px 1px 2px;
 	border-style: double solid solid;
+	border-color: #235;
 	padding-bottom: 10px;
 }
 fieldset legend {
 	background: #eee;
 	font-size: 1.4em;
-	color: #3a9;
+	color: #167;
 	padding-left: 8px;
 	padding-right: 10px;
 }
@@ -112,7 +113,7 @@ fieldset legend {
 }
 
 #login-title .icon {
-	color: #dda;
+	color: #3ea;
 	font-size: 3em;
 	position: relative;
 	top: -40px;
@@ -129,7 +130,7 @@ fieldset legend {
 	border-color: #ccc;
 }
 #login-title .final-icon {
-	color: #dda;
+	color: #3ea;
 	font-size: 3em;
 }
 
@@ -142,8 +143,8 @@ fieldset legend {
 }
 #login-title .subtitle-rotator {
 	font: 6em 'Kaushan Script', cursive;
-	color: #dda;
-	border-bottom: 1px #dda dashed;
+	color: #3ea;
+	border-bottom: 1px #3ea dashed;
 	padding-bottom: 2px;
 	padding-right: 1px;
 	margin-top: 15px;
@@ -153,7 +154,7 @@ fieldset legend {
 	top: -6px;
 }
 #login-title .subtitle-rotator span {
-	border-bottom: 1px #3a9 solid;
+	border-bottom: 1px #167 solid;
 	margin-bottom: -2px;
 	height: 0;
 	width: auto;
@@ -192,20 +193,20 @@ fieldset legend {
 	height: 65px;
 	padding-top: 12px;
 	margin: 5px;
-	color: #3a9;
+	color: #167;
 	text-align: center;
 }
 #view-buttons .view-button:hover {
 	border-color: #aaa;
-	color: #dda;
+	color: #3ea;
 }
 #view-buttons .view-button.current-view {
-	background: #dda;
-	color: #fff;
+	background: #3ea;
+	color: #235;
 	border-color: #666;
 }
 .no-touch #view-buttons .view-button.current-view:hover {
-	color: #3a9;
+	color: #167;
 }
 
 #scrollarea {

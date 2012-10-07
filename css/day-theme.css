@@ -201,7 +201,7 @@ fieldset legend {
 }
 #view-buttons .view-button.current-view {
 	background: #2a2;
-	color: #fff;
+	color: #eee;
 	border-color: #666;
 }
 .no-touch #view-buttons .view-button.current-view:hover {
