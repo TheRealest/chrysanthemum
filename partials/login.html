@@ -1,5 +1,28 @@
-{{apartment.bedrooms}} bedrooms, {{apartment.bathrooms}} bath, with a {{apartment.kitchen}} kitchen.
-<br />
-<input type='text' ng-model='test'></input>
+<div class='row'>
+	<div class='nine columns offset-by-one'>
+		<div id='login-title' style='margin-left: 60px; padding-right: 30px;'>
+			<span class='title'>Chrysanthemum</span> <span class='icon clearfix' ng-click='activateLogin()'><i class='icon-leaf'></i></span>
+			<span class='subtitle clearfix'>Fight the cycle of the seasons – grow your <span class='subtitle-rotator has-tip' title='Chrysanthemum is a real-time, online deck-building game.'><span class='clearfix'>mind</span></span></span>
+			<!-- <div id='icon-fieldset'>
+				<div class='one columns'>
+					<fieldset>
+						<span class='final-icon'><i class='icon-leaf' ng-class='{red: !loginForm.$valid, green: loginForm.$valid}'></i></span>
+					</fieldset>
+				</div>
+				<div id='login-box' class='columns'>
+					<fieldset>
+						<legend><i class='icon-key'></i> Log In</legend>
+						
+						<form name='loginForm' ng-submit=''>
+							<input type='text' name='username' placeholder='Username' ng-model='user.name' ng-pattern='usernameRegexp' required>
+							<small class='error' ng-show='loginForm.username.$error.pattern'>Usernames can't have spaces</small>
 
-<button ng-click='apartment.bathrooms = apartment.bathrooms+1'>Add a bathroom</button>
+							<input type='password' name='password' placeholder='Password' ng-model='user.password' required>
+							<br />
+							<button name='login' type='submit' class='button' ng-class='{success: loginForm.$valid, alert: !loginForm.$valid}' style='margin-right: 50px;'>Log In</button>
+					</fieldset>
+				</div>
+			</div>-->
+		</div>
+	</div>
+</div>

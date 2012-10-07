@@ -1,15 +1,16 @@
-angular.module('chrysanthemum.service', []).
+angular.module('chrysanthemum.services', []).
 	service('wildfire',Wildfire).
-	service('autumn',Autumn);ß
+	service('autumn',Autumn);
 
-angular.module('chrysanthemum.directive', []);
+angular.module('chrysanthemum.directives', []);
 
-angular.module('chrysanthemum.filter', []);
+angular.module('chrysanthemum.filters', []);
 
-angular.module('chrysanthemum', ['chrysanthemum.service','chrysanthemum.directive','chrysanthemum.filter']).
+angular.module('chrysanthemum', ['chrysanthemum.services','chrysanthemum.directives','chrysanthemum.filters']).
 	config(['$routeProvider', function($routeProvider) {
 		$routeProvider.
-			when('/login', {templateUrl: 'partials/login.html',	 controller: oginCtrl}).
+			when('/login', {templateUrl: 'partials/login.html',	 controller: LoginCtrl}).
+			when('/print', {templateUrl: 'partials/print.html',	 controller: LoginCtrl}).
 			when('/games', {templateUrl: 'partials/games.html',	 controller: GamesCtrl}).
 			// when('/plants/:setSlug', {templateUrl: '../partials/plant_sheets.html', controller: PlantSheetsCtrl}).
 			otherwise({redirectTo: '/login'});
