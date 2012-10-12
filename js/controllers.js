@@ -62,9 +62,9 @@ function LoginCtrl($scope,wildfire) {
 			icon.queue('fx',[]); //empty queue
 			icon.animate({color: '#2a2'},500);
 			var loginBox = $('#icon-fieldset');
-			loginBox.animate({top: '+=220px'},1000);
+			loginBox.animate({top: '+=190px'},1000);
 			loginBox.delay(200);
-			loginBox.animate({left: '-=480px'},1500);
+			loginBox.animate({left: '-=465px'},1500);
 			loginBox.delay(100);
 			loginBox.queue(function(next) {
 				var fieldset = $('#login-title #icon-fieldset #login-box');
