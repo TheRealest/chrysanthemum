@@ -7,7 +7,7 @@ function Wildfire($http,$q) {
 	// * `ss`: Firebase snapshot
 	// * `ob`: Javascript object literal
 
-	var rootlink = 'http://gamma.firebase.com/therealest/chrysanthemum';
+	var rootlink = 'https://gamma.firebase.com/therealest/chrysanthemum';
 	var fbRoot = new Firebase(rootlink);
 
 	// Initiators of Angular/Firebase connections
@@ -208,26 +208,83 @@ function Wildfire($http,$q) {
 }
 
 function Autumn(wildfire) {
-	var games = wildfire.fbFROMrl('games');
-	var game = {};
-	var currentgame;
+	var fbGames = wildfire.fbFROMrl('games');
+	var currentGameID;
+
+	wildfire.fbFROMrl('chat').push('fish');
 
 	function newGame(info) {
-		currentgame = games.push(info).name();
+		currentGameID = fbGames.push(info).name();
+		//join game after creation
+	}
+
+	function deleteGame(gameID) {
+		gameID = gameID || currentGameID;
+		//check permissions
+		fbGames.child(gameID).remove(function() {
+			currentGameID = null;
+		});
+	}
+
+	function startGame(gameID) {
+		gameID = gameID || currentGameID;
+		var game = fbGames.child(gameID);
+		var readyAll = false;
+		game.child('players').once('value',function(ssPlayers) {
+			ssPlayers.forEach(function(ssPlayer) {
+				var ready = ssPlayer.val().ready;
+				readyAll = ready || readyAll;
+			});
+		});
+		ready && game.child('started').set(true);
+		return ready;
+		//make players listen for game started?
+	}
+
+	function notifyReady() {
+		//fbGames.child(currentGameID).child('players').child(spring.me).child('ready').set(true);
+	}
+
+	function notifyUnready() {
+		//fbGames.child(currentGameID).child('players').child(spring.me).child('ready').remove();
+	}
+
+	function kickPlayer() {
+
+	}
+
+	function blockPlayer() {
+
+	}
+
+	function invitePlayer() {
+
+	}
+
+	function retrieveGameInfo(gameID) {
+		gameID = gameID || currentGameID;
+		var obGame;
+		fbGames.child(gameID).once('value',function(ss) {
+			obGame = ss.val();
+		});
+		return obGame;
 	}
 
 	function fuseGameList(scope) {
-		wildfire.fuse().withScope(scope).rl('games').md('gamelist').install();
+		wildfire.fuse().withScope(scope).fb(fbGames).md('gamelist').install();
 	}
-
-	// games.on('value', function(ss) {
-	// 	game.list = wildfire.obFROMss(ss);
-	// 	console.log(game.list);
-	// });
 
 	return {
 		newGame:newGame,
-		fuseGameList:fuseGameList,
-		game:game
+		deleteGame:deleteGame,
+		startGame:startGame,
+		notifyReady:notifyReady,
+		notifyUnready:notifyUnready,
+		kickPlayer:kickPlayer,
+		blockPlayer:blockPlayer,
+		invitePlayer:invitePlayer,
+		retrieveGameInfo:retrieveGameInfo,
+
+		fuseGameList:fuseGameList
 	}
 }

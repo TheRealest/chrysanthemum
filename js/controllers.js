@@ -1,6 +1,9 @@
 function LoginCtrl($scope,wildfire) {
 	wildfire.fuse().withScope($scope).rl('test').md('test').install();
 	wildfire.fuse().withScope($scope).rl('apartment').md('apartment').install();
+
+	var fbChat = new Firebase('https://gamma.firebase.com/therealest/test');
+	
 }
 
 function GamesCtrl($scope,autumn) {
