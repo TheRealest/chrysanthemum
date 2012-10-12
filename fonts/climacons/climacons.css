@@ -1,0 +1,29 @@
+/*  Climacons helper CSS file
+
+	*/
+@font-face {
+	font-family:'climacons';
+	src: url('climacons-webfont.eot');
+	src: url('climacons-webfont.eot?#iefix') format('embedded-opentype'),
+		 url('climacons-webfont.woff') format('woff'),
+		 url('climacons-webfont.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+/*  Climacons styles
+	------------------------------------------------------- */
+i[class^="climacon-"]:before, i[class*=" climacon-"]:before {
+	font-family: climacons;
+	font-weight: normal;
+	font-style: normal;
+	display: inline-block;
+	text-decoration: inherit;
+}
+
+/* These helper classes make it easy to see which icon is being 
+displayed from the source without having to check a reference 
+table. Added only as needed due to laziness. */
+.climacon-windy-sun:before					{ content: ';'; }
+.climacon-hail-night:before					{ content: 'i'; }
+.climacon-fog-night:before					{ content: 'f'; }

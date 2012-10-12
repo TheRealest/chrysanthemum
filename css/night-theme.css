@@ -1,0 +1,230 @@
+/* -------------------------------------------------- 
+   Table of Contents
+-----------------------------------------------------
+:: Shared Styles
+:: login
+:: games
+*/
+
+
+/* -----------------------------------------
+   Shared Styles
+----------------------------------------- */
+
+body#index {
+	background: #124;
+}
+
+@font-face {
+	font-family: "Black Rose";
+	src: url('../fonts/BlackRose.ttf');
+	font-weight: normal;
+	font-style: normal;
+}
+
+.animate-hide {
+	opacity: 1;
+	-webkit-transition: opacity 0.5s;
+}
+.hide {
+	opacity: 0;
+	display: block;
+}
+.display-none {
+	display: none;
+}
+
+.animate-shrink {
+	max-height: 400px;
+	opacity: 1;
+	overflow: hidden;
+	-webkit-transition: max-height 2s ease-out, opacity 2s;
+}
+.shrink {
+	max-height: 0;
+	opacity: 0;
+}
+
+.animate-color {
+	-webkit-transition: color 0.3s;
+}
+.red {
+	color: #c22;
+}
+.green {
+	color: #2c2;
+}
+
+fieldset {
+	border-radius: 10px 0 / 8px 0;
+	border-width: 3px 1px 2px;
+	border-style: double solid solid;
+	border-color: #235;
+	padding-bottom: 10px;
+}
+fieldset legend {
+	background: #eee;
+	font-size: 1.4em;
+	color: #167;
+	padding-left: 8px;
+	padding-right: 10px;
+}
+
+.theme-button {
+	font-size: 2.5em;
+	margin-right: 10px;
+	position: relative;
+	top: 10px;
+	color: #235;
+}
+.no-touch #day-theme-button:hover {
+	color: #2a2;
+}
+.no-touch #night-theme-button:hover {
+	color: #167;
+}
+.theme-button.selected-theme {
+	color: #167;
+}
+
+
+/* -----------------------------------------
+   login
+----------------------------------------- */
+
+#login-title {
+	margin-top: 120px;
+	width: auto;
+	color: #167;
+	position: relative;
+	text-align: right;
+}
+
+#login-title .title {
+	/*font: 700 italic 5.5em 'Overlock', cursive;*/
+	/*font: 500 italic 5.7em 'IM Fell DW Pica', cursive;*/
+	/*font: 6em 'Kaushan Script', cursive;*/
+	/*font: 400 10em 'Lovers Quarrel', cursive;*/
+	/*font: 400 6em 'Satisfy', cursive; */
+	/*font: 400 6em 'Condiment', cursive;*/
+	/*font: 400 5em 'Knewave', cursive;*/
+	/*font: 400 5em 'Walter Turncoat', cursive;*/
+	font: 400 5.8em 'Black Rose', cursive;
+}
+
+#login-title .icon {
+	color: #3ea;
+	font-size: 3em;
+	position: relative;
+	top: -40px;
+	left: 5px;
+}
+
+#login-title #icon-fieldset {
+	position: absolute;
+	top: 130px;
+	left: 90px;
+	background: transparent;
+}
+#login-title #icon-fieldset fieldset {
+	border-color: #ccc;
+}
+#login-title .final-icon {
+	color: #3ea;
+	font-size: 3em;
+}
+
+#login-title .subtitle {
+	overflow: hidden;
+	position: relative;
+	top: 10px;
+	right: 40px;
+	font: italic 1.5em 'Satisfy', cursive;
+}
+#login-title .subtitle-rotator {
+	font: 6em 'Kaushan Script', cursive;
+	color: #3ea;
+	border-bottom: 1px #3ea dashed;
+	padding-bottom: 2px;
+	padding-right: 1px;
+	margin-top: 15px;
+	margin-right: 5px;
+	font-size: 1em;
+	position: relative;
+	top: -6px;
+}
+#login-title .subtitle-rotator span {
+	border-bottom: 1px #167 solid;
+	margin-bottom: -2px;
+	height: 0;
+	width: auto;
+	position: relative;
+	top: 6px;
+}
+
+#login-box {
+	height: 400px;
+	width: 400px;
+	margin: -10px;
+}
+#login-box legend {
+	text-align: left;
+}
+
+.clearfix:before, .clearfix:after {
+	content: ' ';
+	display: table;
+}
+.clearfix:after{
+	clear: both;
+}
+
+
+/* -----------------------------------------
+   games
+----------------------------------------- */
+
+#view-buttons {
+	padding-top: 25px;
+}
+#view-buttons .view-button {
+	font-size: 2em;
+	width: 65px;
+	height: 65px;
+	padding-top: 12px;
+	margin: 5px;
+	color: #167;
+	text-align: center;
+}
+#view-buttons .view-button:hover {
+	border-color: #aaa;
+	color: #3ea;
+}
+#view-buttons .view-button.current-view {
+	background: #3ea;
+	color: #235;
+	border-color: #666;
+}
+.no-touch #view-buttons .view-button.current-view:hover {
+	color: #167;
+}
+
+#scrollarea {
+	max-height: 210px;
+	overflow: auto;
+}
+#gamelist .odd {
+	background: #e0f5e0;
+}
+#gamelist .even {
+
+}
+#gamelist .lineitem {
+	padding: 4px;
+}
+.icon-unlock.privacyicon {
+	color: #ccc;
+}
+.icon-lock.privacyicon {
+	color: #888;
+}

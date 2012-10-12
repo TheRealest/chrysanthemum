@@ -1,12 +1,12 @@
-angular.module('chrysanthemum.service', []).
+angular.module('chrysanthemum.services', []).
 	service('wildfire',Wildfire).
 	service('autumn',Autumn);
 
-angular.module('chrysanthemum.directive', []);
+angular.module('chrysanthemum.directives', []);
 
-angular.module('chrysanthemum.filter', []);
+angular.module('chrysanthemum.filters', []);
 
-angular.module('chrysanthemum', ['chrysanthemum.service','chrysanthemum.directive','chrysanthemum.filter']).
+angular.module('chrysanthemum', ['chrysanthemum.services','chrysanthemum.directives','chrysanthemum.filters']).
 	config(['$routeProvider', function($routeProvider) {
 		$routeProvider.
 			when('/login', {templateUrl: 'partials/login.html',	 controller: LoginCtrl}).
