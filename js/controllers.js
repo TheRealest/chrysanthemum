@@ -17,29 +17,11 @@ function LoginCtrl($scope,wildfire) {
 	$scope.usernameRegexp = /^\w+$/;
 	$scope.keywords = ['mind','strategy','deck','garden','harmony','roots','plant'];
 
-	// $(document).tooltips();
-
-	// $scope.blinkIcon = function() {
-	// 	var icon = $('#login-title .icon');
-	// 	icon.delay(2500).animate({color: '#543'},500).delay(100).animate({color: '#2a2'},500).delay(1400);
-	// 	icon.queue(function(next) {$scope.blinkIcon(); next();});
-	// }
-
-	// $scope.changeKeyword = function(i) {
-	// 	var subtitle = $('#login-title .subtitle');
-	// 	var keywordWrapper = $('#login-title .subtitle-rotator');
-	// 	var keyword = $('#login-title .subtitle-rotator span');
-	// 	keyword.animate({color: '#eee'},500);
-	// 	keyword.queue(function(next) {keyword.text($scope.keywords[i]); subtitle.fadeToggle(0).fadeToggle(0); next();});
-	// 	keyword.animate({color: '#2a2'},500).delay(4000);
-	// 	var nextIndex = Math.floor(Math.random()*$scope.keywords.length);
-	// 	if (nextIndex == i) nextIndex = Math.floor(Math.random()*$scope.keywords.length);
-	// 	keyword.queue(function(next) {$scope.changeKeyword(nextIndex); next();});
-	// }
+	$(document).foundationTooltips();
 
 	$scope.blinkIcon = function() {
 		var icon = $('#login-title .icon');
-		icon.delay(2500).animate({color: '#dda'},500).delay(100).animate({color: '#3ea'},500).delay(1400);
+		icon.delay(2500).animate({color: '#543'},500).delay(100).animate({color: '#2a2'},500).delay(1400);
 		icon.queue(function(next) {$scope.blinkIcon(); next();});
 	}
 
@@ -47,41 +29,59 @@ function LoginCtrl($scope,wildfire) {
 		var subtitle = $('#login-title .subtitle');
 		var keywordWrapper = $('#login-title .subtitle-rotator');
 		var keyword = $('#login-title .subtitle-rotator span');
-		keyword.animate({color: '#124'},500);
+		keyword.animate({color: '#eee'},500);
 		keyword.queue(function(next) {keyword.text($scope.keywords[i]); subtitle.fadeToggle(0).fadeToggle(0); next();});
-		keyword.animate({color: '#3ea'},500).delay(4000);
+		keyword.animate({color: '#2a2'},500).delay(4000);
 		var nextIndex = Math.floor(Math.random()*$scope.keywords.length);
 		if (nextIndex == i) nextIndex = Math.floor(Math.random()*$scope.keywords.length);
 		keyword.queue(function(next) {$scope.changeKeyword(nextIndex); next();});
 	}
 
+	// $scope.blinkIcon = function() {
+	// 	var icon = $('#login-title .icon');
+	// 	icon.delay(2500).animate({color: '#dda'},500).delay(100).animate({color: '#3ea'},500).delay(1400);
+	// 	icon.queue(function(next) {$scope.blinkIcon(); next();});
+	// }
+
+	// $scope.changeKeyword = function(i) {
+	// 	var subtitle = $('#login-title .subtitle');
+	// 	var keywordWrapper = $('#login-title .subtitle-rotator');
+	// 	var keyword = $('#login-title .subtitle-rotator span');
+	// 	keyword.animate({color: '#124'},500);
+	// 	keyword.queue(function(next) {keyword.text($scope.keywords[i]); subtitle.fadeToggle(0).fadeToggle(0); next();});
+	// 	keyword.animate({color: '#3ea'},500).delay(4000);
+	// 	var nextIndex = Math.floor(Math.random()*$scope.keywords.length);
+	// 	if (nextIndex == i) nextIndex = Math.floor(Math.random()*$scope.keywords.length);
+	// 	keyword.queue(function(next) {$scope.changeKeyword(nextIndex); next();});
+	// }
+
 	$scope.activateLogin = function() {
-		var icon = $('#login-title .icon');
-		icon.stop(true,true); //stop the current action, and...
-		icon.queue('fx',[]); //empty queue
-		icon.css('color','#2a2');
-		icon.animate({top: '+=200px'},1000);
-		icon.delay(200);
-		icon.animate({left: '-=505px'},1500);
-		icon.delay(100);
-		icon.queue(function(next) {
-			var position = icon.offset();
-			var fieldset = $('#login-title #icon-fieldset')
-			fieldset.css('top',position.top-149-1);   //calculated transformation
-			fieldset.css('left',position.left-367+148); //for moving fieldset to old logo position
-			fieldset.fadeIn(2500);
-			next();
-		});
-		icon.delay(2000);
-		icon.animate({opacity: '0'},0);
+		if (!$scope.loginActivated) {
+			var icon = $('#login-title .icon');
+			icon.stop(true,true); //stop the current action, and...
+			icon.queue('fx',[]); //empty queue
+			icon.animate({color: '#2a2'},500);
+			var loginBox = $('#icon-fieldset');
+			loginBox.animate({top: '+=220px'},1000);
+			loginBox.delay(200);
+			loginBox.animate({left: '-=480px'},1500);
+			loginBox.delay(100);
+			loginBox.queue(function(next) {
+				var fieldset = $('#login-title #icon-fieldset #login-box');
+				fieldset.fadeIn(2500);
+				$('#login-title #icon-fieldset #login-icon fieldset').animate({borderColor: '#ccc'},2500);
+				next();
+			});
+			$scope.loginActivated = true;
+			icon.css({cursor: 'auto'});
+		}
 	}
 
-	console.log(3);
-	$('#login-title #icon-fieldset').hide();
+	// $('#login-title #icon-fieldset #login-box').css({opacity: 0});
+	$('#login-title #icon-fieldset #login-box').hide();
+	$('#login-title #icon-fieldset #login-icon fieldset').css({borderColor: 'transparent'});
 	$scope.changeKeyword(0);
 	$scope.blinkIcon();
-	// $scope.activateLogin();
->>>>>>> testing-loginpartial
 }
 
 function GamesCtrl($scope,autumn) {

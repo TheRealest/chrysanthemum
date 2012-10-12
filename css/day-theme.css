@@ -109,28 +109,24 @@ fieldset legend {
 	/*font: 400 5em 'Knewave', cursive;*/
 	/*font: 400 5em 'Walter Turncoat', cursive;*/
 	font: 400 5.8em 'Black Rose', cursive;
+	position: relative;
+	right: 20px;
 }
 
-#login-title .icon {
+#icon-fieldset .icon {
 	color: #2a2;
 	font-size: 3em;
-	position: relative;
-	top: -40px;
-	left: 5px;
+	cursor: pointer;
 }
 
 #login-title #icon-fieldset {
 	position: absolute;
-	top: 130px;
-	left: 90px;
+	top: -40px;
+	left: 540px;
 	background: transparent;
 }
 #login-title #icon-fieldset fieldset {
 	border-color: #ccc;
-}
-#login-title .final-icon {
-	color: #2a2;
-	font-size: 3em;
 }
 
 #login-title .subtitle {
@@ -162,12 +158,24 @@ fieldset legend {
 }
 
 #login-box {
-	height: 400px;
+	height: 240px;
 	width: 400px;
 	margin: -10px;
+	float: right;
 }
 #login-box legend {
 	text-align: left;
+}
+#login-box #submit-button {
+	position: relative;
+	right: 30px;
+	top: 8px;
+}
+#login-box #register-button {
+	position: relative;
+	right: 280px;
+	top: -15px;
+	margin-bottom: -10px;
 }
 
 .clearfix:before, .clearfix:after {
