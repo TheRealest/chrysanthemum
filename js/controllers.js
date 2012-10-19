@@ -11,7 +11,7 @@ function ThemeCtrl($scope) {
 		$('link.theme:not(#'+theme+')').attr('disabled','');
 		$scope.currentTheme = theme;
 	}
-	$('link.theme:not(#day-theme)').attr('disabled','');
+	$('link.theme:not(#main-theme)').attr('disabled',''); //using regular stylesheet until Themer service is created
 }
 function LoginCtrl($scope,wildfire) {
 	$scope.usernameRegexp = /^\w+$/;

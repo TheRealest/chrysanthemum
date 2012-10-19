@@ -1,230 +1,232 @@
 /* -------------------------------------------------- 
    Table of Contents
 -----------------------------------------------------
+:: Variables
 :: Shared Styles
 :: login
 :: games
 */
-
-
+/* -----------------------------------------
+   Variables
+----------------------------------------- */
+/* DAY THEME ---------------------------- */
+/*$background-color:			#eee;
+$off-background-color:		#ddd;
+$text-color:				#444;
+$accent-color:				#2a2;
+$rare-color:				#543;*/
+/* NIGHT THEME -------------------------- */
+/* SPRING SHOWERS THEME ----------------- */
+/*$background-color:			#fe8;
+$off-background-color:		#fd1;
+$text-color:				#7ae;
+$accent-color:				#979;
+$rare-color:				#8b5;*/
 /* -----------------------------------------
    Shared Styles
 ----------------------------------------- */
-
 body#index {
-	background: #124;
-}
+  background: #112244; }
 
 @font-face {
-	font-family: "Black Rose";
-	src: url('../fonts/BlackRose.ttf');
-	font-weight: normal;
-	font-style: normal;
-}
+  font-family: "Black Rose";
+  src: url("../fonts/BlackRose.ttf");
+  font-weight: normal;
+  font-style: normal; }
 
 .animate-hide {
-	opacity: 1;
-	-webkit-transition: opacity 0.5s;
-}
+  opacity: 1;
+  -webkit-transition: opacity 0.5s; }
+
 .hide {
-	opacity: 0;
-	display: block;
-}
+  opacity: 0;
+  display: block; }
+
 .display-none {
-	display: none;
-}
+  display: none; }
 
 .animate-shrink {
-	max-height: 400px;
-	opacity: 1;
-	overflow: hidden;
-	-webkit-transition: max-height 2s ease-out, opacity 2s;
-}
+  max-height: 400px;
+  opacity: 1;
+  overflow: hidden;
+  -webkit-transition: max-height 2s ease-out, opacity 2s; }
+
 .shrink {
-	max-height: 0;
-	opacity: 0;
-}
+  max-height: 0;
+  opacity: 0; }
 
 .animate-color {
-	-webkit-transition: color 0.3s;
-}
+  -webkit-transition: color 0.3s; }
+
 .red {
-	color: #c22;
-}
+  color: #c22; }
+
 .green {
-	color: #2c2;
-}
+  color: #2c2; }
 
 fieldset {
-	border-radius: 10px 0 / 8px 0;
-	border-width: 3px 1px 2px;
-	border-style: double solid solid;
-	border-color: #235;
-	padding-bottom: 10px;
-}
+  border-radius: 10px 0/8px 0;
+  border-width: 3px 1px 2px;
+  border-style: double solid solid;
+  border-color: #223355;
+  padding-bottom: 10px; }
+
 fieldset legend {
-	background: #eee;
-	font-size: 1.4em;
-	color: #167;
-	padding-left: 8px;
-	padding-right: 10px;
-}
+  background: #112244;
+  font-size: 1.4em;
+  color: #116677;
+  padding-left: 8px;
+  padding-right: 10px; }
 
 .theme-button {
-	font-size: 2.5em;
-	margin-right: 10px;
-	position: relative;
-	top: 10px;
-	color: #235;
-}
-.no-touch #day-theme-button:hover {
-	color: #2a2;
-}
-.no-touch #night-theme-button:hover {
-	color: #167;
-}
-.theme-button.selected-theme {
-	color: #167;
-}
+  font-size: 2.5em;
+  margin-right: 10px;
+  position: relative;
+  top: 10px;
+  color: #223355; }
 
+.no-touch #day-theme-button:hover {
+  color: #33eeaa; }
+
+.no-touch #night-theme-button:hover {
+  color: #167; }
+
+.theme-button.selected-theme {
+  color: #33eeaa; }
 
 /* -----------------------------------------
    login
 ----------------------------------------- */
-
 #login-title {
-	margin-top: 120px;
-	width: auto;
-	color: #167;
-	position: relative;
-	text-align: right;
-}
+  margin-top: 120px;
+  width: auto;
+  color: #116677;
+  position: relative;
+  text-align: right; }
 
 #login-title .title {
-	/*font: 700 italic 5.5em 'Overlock', cursive;*/
-	/*font: 500 italic 5.7em 'IM Fell DW Pica', cursive;*/
-	/*font: 6em 'Kaushan Script', cursive;*/
-	/*font: 400 10em 'Lovers Quarrel', cursive;*/
-	/*font: 400 6em 'Satisfy', cursive; */
-	/*font: 400 6em 'Condiment', cursive;*/
-	/*font: 400 5em 'Knewave', cursive;*/
-	/*font: 400 5em 'Walter Turncoat', cursive;*/
-	font: 400 5.8em 'Black Rose', cursive;
-}
+  /*font: 700 italic 5.5em 'Overlock', cursive;*/
+  /*font: 500 italic 5.7em 'IM Fell DW Pica', cursive;*/
+  /*font: 6em 'Kaushan Script', cursive;*/
+  /*font: 400 10em 'Lovers Quarrel', cursive;*/
+  /*font: 400 6em 'Satisfy', cursive; */
+  /*font: 400 6em 'Condiment', cursive;*/
+  /*font: 400 5em 'Knewave', cursive;*/
+  /*font: 400 5em 'Walter Turncoat', cursive;*/
+  font: 400 5.8em 'Black Rose', cursive;
+  position: relative;
+  right: 20px; }
 
-#login-title .icon {
-	color: #3ea;
-	font-size: 3em;
-	position: relative;
-	top: -40px;
-	left: 5px;
-}
+#icon-fieldset .icon {
+  color: #33eeaa;
+  font-size: 3em;
+  cursor: pointer; }
 
 #login-title #icon-fieldset {
-	position: absolute;
-	top: 130px;
-	left: 90px;
-	background: transparent;
-}
+  position: absolute;
+  top: -20px;
+  left: 525px;
+  background: transparent; }
+
 #login-title #icon-fieldset fieldset {
-	border-color: #ccc;
-}
-#login-title .final-icon {
-	color: #3ea;
-	font-size: 3em;
-}
+  border-color: #223355; }
 
 #login-title .subtitle {
-	overflow: hidden;
-	position: relative;
-	top: 10px;
-	right: 40px;
-	font: italic 1.5em 'Satisfy', cursive;
-}
+  overflow: hidden;
+  position: relative;
+  top: 10px;
+  right: 40px;
+  font: italic 1.5em 'Satisfy', cursive; }
+
 #login-title .subtitle-rotator {
-	font: 6em 'Kaushan Script', cursive;
-	color: #3ea;
-	border-bottom: 1px #3ea dashed;
-	padding-bottom: 2px;
-	padding-right: 1px;
-	margin-top: 15px;
-	margin-right: 5px;
-	font-size: 1em;
-	position: relative;
-	top: -6px;
-}
+  font: 6em 'Kaushan Script', cursive;
+  color: #33eeaa;
+  border-bottom: 1px #33eeaa dashed;
+  padding-bottom: 2px;
+  padding-right: 1px;
+  margin-top: 15px;
+  margin-right: 5px;
+  font-size: 1em;
+  position: relative;
+  top: -6px; }
+
 #login-title .subtitle-rotator span {
-	border-bottom: 1px #167 solid;
-	margin-bottom: -2px;
-	height: 0;
-	width: auto;
-	position: relative;
-	top: 6px;
-}
+  border-bottom: 1px #116677 solid;
+  margin-bottom: -2px;
+  height: 0;
+  width: auto;
+  position: relative;
+  top: 6px; }
 
 #login-box {
-	height: 400px;
-	width: 400px;
-	margin: -10px;
-}
+  height: 240px;
+  width: 400px;
+  margin: -10px;
+  float: right; }
+
 #login-box legend {
-	text-align: left;
-}
+  text-align: left; }
+
+#login-box #submit-button {
+  position: relative;
+  right: 30px;
+  top: 8px; }
+
+#login-box #register-button {
+  position: relative;
+  right: 280px;
+  top: -15px;
+  margin-bottom: -10px; }
 
 .clearfix:before, .clearfix:after {
-	content: ' ';
-	display: table;
-}
-.clearfix:after{
-	clear: both;
-}
+  content: ' ';
+  display: table; }
 
+.clearfix:after {
+  clear: both; }
 
 /* -----------------------------------------
    games
 ----------------------------------------- */
-
 #view-buttons {
-	padding-top: 25px;
-}
+  padding-top: 25px; }
+
 #view-buttons .view-button {
-	font-size: 2em;
-	width: 65px;
-	height: 65px;
-	padding-top: 12px;
-	margin: 5px;
-	color: #167;
-	text-align: center;
-}
+  font-size: 2em;
+  width: 65px;
+  height: 65px;
+  padding-top: 12px;
+  margin: 5px;
+  color: #116677;
+  text-align: center; }
+
 #view-buttons .view-button:hover {
-	border-color: #aaa;
-	color: #3ea;
-}
+  border-color: #116677;
+  color: #33eeaa; }
+
 #view-buttons .view-button.current-view {
-	background: #3ea;
-	color: #235;
-	border-color: #666;
-}
+  background: #33eeaa;
+  color: #112244;
+  border-color: #116677; }
+
 .no-touch #view-buttons .view-button.current-view:hover {
-	color: #167;
-}
+  color: #116677; }
 
 #scrollarea {
-	max-height: 210px;
-	overflow: auto;
-}
-#gamelist .odd {
-	background: #e0f5e0;
-}
-#gamelist .even {
+  max-height: 210px;
+  overflow: auto; }
 
-}
+#gamelist .odd {
+  background: #33eeaa; }
+
+#gamelist .even {
+  /*background: $rare-color;*/ }
+
 #gamelist .lineitem {
-	padding: 4px;
-}
+  padding: 4px; }
+
 .icon-unlock.privacyicon {
-	color: #ccc;
-}
+  color: #ccc; }
+
 .icon-lock.privacyicon {
-	color: #888;
-}
+  color: #888; }
